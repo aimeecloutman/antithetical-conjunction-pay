@@ -19,6 +19,7 @@
 
         html,
         body {
+
             margin: 0;
             padding: 0;
 
@@ -28,8 +29,6 @@
 
 
         body {
-
-            margin: 0;
 
             font-family:
                 -apple-system,
@@ -95,6 +94,8 @@
 
             font-weight: 700;
 
+            letter-spacing: 0.2px;
+
             cursor: pointer;
 
             box-shadow:
@@ -121,7 +122,7 @@
 
 
         /* ==========================================
-           BLOOD SPLAT
+           BLOOD EFFECT
         ========================================== */
 
         .blood {
@@ -131,7 +132,6 @@
             inset: 0;
 
             width: 100vw;
-
             height: 100vh;
 
             pointer-events: none;
@@ -139,105 +139,76 @@
             z-index: 50;
 
             opacity: 0;
-
-            transform:
-                scale(0.05);
-
-            transform-origin:
-                50% 40%;
-
-            transition:
-                transform 0.55s
-                cubic-bezier(.12,.9,.2,1),
-
-                opacity 0.1s ease;
         }
 
 
         .blood.active {
 
             opacity: 1;
-
-            transform:
-                scale(1);
         }
 
 
 
         /* ==========================================
-           ROUNDED ORGANIC SPLAT
+           MAIN CARTOON BLOOD SPLAT
         ========================================== */
 
-        .splat {
+        .blood-main {
 
             position: absolute;
 
             left: 50%;
-
             top: 40%;
 
-            width: 900px;
-
-            height: 700px;
-
-            transform:
-                translate(-50%, -50%);
-
-            background:
-
-                radial-gradient(
-                    ellipse at 50% 48%,
-
-                    #b00000 0%,
-
-                    #920000 45%,
-
-                    #760000 72%,
-
-                    #570000 100%
-                );
-
-            /*
-                Rounded organic shape.
-
-                Unlike polygon(), this uses
-                rounded blobs and circles.
-            */
-
-            border-radius:
-
-                48% 52% 46% 54%
-                /
-                51% 45% 55% 49%;
-
-            box-shadow:
-
-                0 10px 20px
-                rgba(0, 0, 0, 0.35),
-
-                inset
-                0 -15px 25px
-                rgba(40, 0, 0, 0.3);
-
-            transform-origin:
-                center;
+            width: 650px;
+            height: 500px;
 
             transform:
                 translate(-50%, -50%)
                 scale(0);
 
+            transform-origin:
+                center;
+
+            background:
+
+                radial-gradient(
+                    ellipse at center,
+
+                    #a90000 0%,
+                    #850000 58%,
+                    #650000 100%
+                );
+
+            /*
+                Very rounded cartoon shape.
+            */
+
+            border-radius:
+
+                53% 47% 49% 51%
+                /
+                48% 55% 45% 52%;
+
+            box-shadow:
+
+                0 8px 15px
+                rgba(0,0,0,0.3);
+
             opacity: 0;
 
             transition:
 
-                transform 0.55s
-                cubic-bezier(.12,.9,.2,1),
+                transform
+                0.55s
+                cubic-bezier(.15,1.25,.25,1),
 
-                opacity 0.1s ease;
+                opacity
+                0.1s ease;
         }
 
 
-        .blood.active .splat {
+        .blood.active .blood-main {
 
             transform:
                 translate(-50%, -50%)
@@ -249,31 +220,137 @@
 
 
         /* ==========================================
-           ORGANIC SPLAT BLOBS
+           CARTOON BLOOD BLOBS
         ========================================== */
 
-        .blob {
+        .blood-blob {
+
+            position: absolute;
+
+            background:
+                #790000;
+
+            border-radius: 50%;
+
+            opacity: 0;
+
+            transform:
+                scale(0);
+
+            transition:
+
+                transform
+                0.55s
+                cubic-bezier(.1,1.2,.2,1),
+
+                opacity
+                0.1s ease;
+        }
+
+
+        .blood.active .blood-blob {
+
+            transform:
+                scale(1);
+
+            opacity: 1;
+        }
+
+
+        /* Left blob */
+
+        .blob-left {
+
+            width: 170px;
+            height: 105px;
+
+            left: 3%;
+            top: 39%;
+
+            transform:
+                rotate(-18deg)
+                scale(0);
+        }
+
+
+        /* Right blob */
+
+        .blob-right {
+
+            width: 190px;
+            height: 115px;
+
+            right: 2%;
+            top: 41%;
+
+            transform:
+                rotate(15deg)
+                scale(0);
+        }
+
+
+        /* Top blob */
+
+        .blob-top {
+
+            width: 130px;
+            height: 90px;
+
+            left: 43%;
+            top: 4%;
+
+            transform:
+                scale(0);
+        }
+
+
+        /* Bottom blob */
+
+        .blob-bottom {
+
+            width: 150px;
+            height: 100px;
+
+            left: 48%;
+            bottom: 3%;
+
+            transform:
+                rotate(-10deg)
+                scale(0);
+        }
+
+
+
+        /* ==========================================
+           LITTLE CARTOON SPLASH DROPS
+        ========================================== */
+
+        .splash-drop {
 
             position: absolute;
 
             background:
                 #850000;
 
-            border-radius:
-                50%;
+            border-radius: 50%;
+
+            opacity: 0;
 
             transform:
                 scale(0);
 
-            opacity: 0;
-
             transition:
-                transform 0.55s
-                cubic-bezier(.1,.9,.2,1);
+
+                transform
+                0.45s
+                cubic-bezier(.1,1.3,.2,1),
+
+                opacity
+                0.1s ease;
         }
 
 
-        .blood.active .blob {
+        .blood.active .splash-drop {
 
             transform:
                 scale(1);
@@ -282,60 +359,87 @@
         }
 
 
-        .blob-1 {
+        .drop-1 {
 
-            width: 220px;
-            height: 150px;
+            width: 35px;
+            height: 35px;
 
-            left: -100px;
-            top: 220px;
-
-            transform:
-                rotate(-25deg)
-                scale(0);
+            left: 8%;
+            top: 28%;
         }
 
 
-        .blob-2 {
+        .drop-2 {
 
-            width: 250px;
-            height: 170px;
+            width: 22px;
+            height: 22px;
 
-            right: -120px;
-            top: 180px;
+            left: 18%;
+            top: 18%;
 
-            transform:
-                rotate(20deg)
-                scale(0);
+            transition-delay:
+                0.08s;
         }
 
 
-        .blob-3 {
+        .drop-3 {
 
-            width: 170px;
-            height: 120px;
+            width: 30px;
+            height: 30px;
 
-            left: 100px;
-            top: -80px;
+            right: 12%;
+            top: 25%;
+
+            transition-delay:
+                0.12s;
         }
 
 
-        .blob-4 {
+        .drop-4 {
 
-            width: 190px;
-            height: 130px;
+            width: 18px;
+            height: 18px;
 
-            right: 100px;
-            bottom: -60px;
+            right: 20%;
+            top: 15%;
+
+            transition-delay:
+                0.18s;
+        }
+
+
+        .drop-5 {
+
+            width: 27px;
+            height: 27px;
+
+            left: 13%;
+            bottom: 27%;
+
+            transition-delay:
+                0.1s;
+        }
+
+
+        .drop-6 {
+
+            width: 20px;
+            height: 20px;
+
+            right: 9%;
+            bottom: 23%;
+
+            transition-delay:
+                0.15s;
         }
 
 
 
         /* ==========================================
-           PAINT SPLASH TENDRILS
+           CARTOON PAINT ARMS
         ========================================== */
 
-        .tendril {
+        .blood-arm {
 
             position: absolute;
 
@@ -354,90 +458,80 @@
                 center;
 
             transition:
-                transform 0.65s
-                cubic-bezier(.1,.9,.2,1),
 
-                opacity 0.2s ease;
+                transform
+                0.65s
+                cubic-bezier(.1,1.1,.2,1),
+
+                opacity
+                0.1s ease;
         }
 
 
-        .blood.active .tendril {
-
-            opacity: 1;
+        .blood.active .blood-arm {
 
             transform:
                 scaleX(1);
+
+            opacity: 1;
         }
 
 
-        .tendril-left {
+        .arm-left {
 
-            width: 500px;
+            width: 360px;
             height: 55px;
 
-            left: -420px;
-            top: 45%;
-
-            transform:
-                rotate(-8deg)
-                scaleX(0);
-        }
-
-
-        .tendril-right {
-
-            width: 500px;
-            height: 55px;
-
-            right: -420px;
+            left: -190px;
             top: 42%;
 
             transform:
-                rotate(10deg)
+                rotate(-12deg)
                 scaleX(0);
         }
 
 
-        .tendril-top {
+        .arm-right {
 
-            width: 400px;
+            width: 380px;
+            height: 58px;
+
+            right: -210px;
+            top: 45%;
+
+            transform:
+                rotate(12deg)
+                scaleX(0);
+        }
+
+
+        .arm-top {
+
+            width: 300px;
             height: 45px;
 
-            top: -270px;
-            left: 20%;
+            left: 30%;
+            top: -120px;
 
             transform:
-                rotate(-25deg)
-                scaleX(0);
-        }
-
-
-        .tendril-bottom {
-
-            width: 450px;
-            height: 50px;
-
-            bottom: -280px;
-            right: 20%;
-
-            transform:
-                rotate(-20deg)
+                rotate(-15deg)
                 scaleX(0);
         }
 
 
 
         /* ==========================================
-           BIG BLOOD DRIPS
+           THICK CARTOON DRIPS
         ========================================== */
 
-        .drip {
+        .blood-drip {
 
             position: absolute;
 
             background:
                 linear-gradient(
                     to bottom,
+
                     #850000,
                     #620000
                 );
@@ -445,23 +539,26 @@
             border-radius:
                 0 0 50% 50%;
 
+            opacity: 0;
+
             transform:
                 scaleY(0);
 
             transform-origin:
                 top;
 
-            opacity: 0;
-
             transition:
-                transform 0.8s
-                cubic-bezier(.15,.8,.2,1),
 
-                opacity 0.2s ease;
+                transform
+                0.75s
+                cubic-bezier(.15,.9,.2,1),
+
+                opacity
+                0.2s ease;
         }
 
 
-        .blood.active .drip {
+        .blood.active .blood-drip {
 
             transform:
                 scaleY(1);
@@ -472,98 +569,93 @@
 
         .drip-1 {
 
+            left: 25%;
+            top: 58%;
+
             width: 38px;
-            height: 190px;
-
-            left: 27%;
-
-            top: 62%;
-
-            transition-delay:
-                0.05s;
-        }
-
-
-        .drip-2 {
-
-            width: 25px;
-            height: 130px;
-
-            left: 39%;
-
-            top: 61%;
-
-            transition-delay:
-                0.15s;
-        }
-
-
-        .drip-3 {
-
-            width: 52px;
-            height: 250px;
-
-            left: 50%;
-
-            top: 59%;
-
-            transition-delay:
-                0.02s;
-        }
-
-
-        .drip-4 {
-
-            width: 28px;
-            height: 170px;
-
-            left: 62%;
-
-            top: 61%;
-
-            transition-delay:
-                0.2s;
-        }
-
-
-        .drip-5 {
-
-            width: 42px;
-            height: 210px;
-
-            left: 73%;
-
-            top: 60%;
+            height: 180px;
 
             transition-delay:
                 0.1s;
         }
 
 
+        .drip-2 {
+
+            left: 39%;
+            top: 57%;
+
+            width: 23px;
+            height: 125px;
+
+            transition-delay:
+                0.2s;
+        }
+
+
+        .drip-3 {
+
+            left: 50%;
+            top: 56%;
+
+            width: 52px;
+            height: 240px;
+
+            transition-delay:
+                0.05s;
+        }
+
+
+        .drip-4 {
+
+            left: 63%;
+            top: 58%;
+
+            width: 27px;
+            height: 160px;
+
+            transition-delay:
+                0.15s;
+        }
+
+
+        .drip-5 {
+
+            left: 74%;
+            top: 57%;
+
+            width: 42px;
+            height: 195px;
+
+            transition-delay:
+                0.25s;
+        }
+
+
 
         /* ==========================================
-           BLOOD DISAPPEARING
-
-           EVERYTHING disappears together.
+           BLOOD DISAPPEARS
         ========================================== */
 
         .blood.draining {
 
             opacity: 0;
 
-            transform:
-                scale(1.08)
-                translateY(40px);
-
             transition:
 
-                opacity 2.5s ease,
-
-                transform 2.5s ease;
+                opacity
+                1.8s
+                ease;
         }
 
 
-        .blood.draining .drip {
+        /*
+            Make the individual drips retract
+            at the same time.
+        */
+
+        .blood.draining
+        .blood-drip {
 
             transform:
                 scaleY(0);
@@ -571,9 +663,12 @@
             opacity: 0;
 
             transition:
-                transform 1.5s ease-in,
 
-                opacity 1.2s ease;
+                transform
+                1s ease-in,
+
+                opacity
+                0.8s ease;
         }
 
 
@@ -587,12 +682,13 @@
             position: absolute;
 
             top:
-                calc(100% + 30px);
+                calc(100% + 32px);
 
             left: 50%;
 
             transform:
-                translateX(-50%);
+                translateX(-50%)
+                translateY(10px);
 
             width: 340px;
 
@@ -605,19 +701,28 @@
             pointer-events: none;
 
             transition:
-                opacity 1.2s ease;
+
+                opacity
+                1s ease,
+
+                transform
+                1s ease;
         }
 
 
         .thanks-message.show {
 
             opacity: 1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
         }
 
 
 
         /* ==========================================
-           BLOOD LETTERING
+           DRIPPING BLOOD LETTERING
         ========================================== */
 
         .thanks-text {
@@ -627,9 +732,10 @@
             display: inline-block;
 
             color:
-                #700000;
+                #720000;
 
             font-family:
+
                 Georgia,
                 "Times New Roman",
                 serif;
@@ -641,24 +747,24 @@
                 900;
 
             line-height:
-                1.2;
+                1.25;
 
             letter-spacing:
-                0.4px;
+                0.3px;
 
             text-shadow:
 
                 1px 2px 0
-                #3b0000,
+                #350000,
 
-                0 3px 4px
-                rgba(0, 0, 0, 0.55);
+                0 3px 6px
+                rgba(0,0,0,0.55);
         }
 
 
         /*
-            BLOOD DRIPS ATTACHED
-            TO THE ACTUAL WORDS
+            BIG DRIPS HANGING FROM
+            THE WORDS
         */
 
         .thanks-text::before {
@@ -667,31 +773,28 @@
 
             position: absolute;
 
-            left: 12%;
+            left: 8%;
 
-            bottom: -24px;
+            bottom: -29px;
 
             width: 10px;
-
-            height: 32px;
+            height: 38px;
 
             background:
-                linear-gradient(
-                    to bottom,
-                    #700000,
-                    #4b0000
-                );
+                #720000;
 
             border-radius:
                 0 0 50% 50%;
 
             box-shadow:
 
-                55px 7px 0 -2px #700000,
+                43px 8px 0 -1px #720000,
 
-                118px 2px 0 -3px #700000,
+                92px 2px 0 -2px #720000,
 
-                190px 5px 0 -3px #700000;
+                145px 9px 0 -2px #720000,
+
+                205px 3px 0 -3px #720000;
         }
 
 
@@ -701,16 +804,15 @@
 
             position: absolute;
 
-            right: 9%;
+            right: 6%;
 
-            bottom: -17px;
+            bottom: -20px;
 
             width: 7px;
-
-            height: 24px;
+            height: 28px;
 
             background:
-                #700000;
+                #720000;
 
             border-radius:
                 0 0 50% 50%;
@@ -740,59 +842,35 @@
             }
 
 
-            .splat {
+            .blood-main {
 
-                width: 600px;
-
-                height: 560px;
+                width: 560px;
+                height: 470px;
             }
 
 
-            .tendril {
+            .blood-arm {
 
                 display: none;
             }
 
 
+            .blood-blob {
+
+                transform:
+                    scale(0.8);
+            }
+
+
             .thanks-message {
 
-                width: 280px;
+                width: 285px;
             }
 
 
             .thanks-text {
 
                 font-size: 19px;
-            }
-
-
-            .drip-1 {
-
-                left: 15%;
-            }
-
-
-            .drip-2 {
-
-                left: 30%;
-            }
-
-
-            .drip-3 {
-
-                left: 48%;
-            }
-
-
-            .drip-4 {
-
-                left: 65%;
-            }
-
-
-            .drip-5 {
-
-                left: 80%;
             }
 
         }
@@ -806,7 +884,7 @@
 
 
     <!-- ==========================================
-         BLOOD SPLAT
+         BLOOD
     ========================================== -->
 
     <div
@@ -814,39 +892,95 @@
         id="blood"
     >
 
-        <div class="splat">
+        <!-- MAIN ROUNDED SPLAT -->
 
-            <div class="blob blob-1"></div>
-
-            <div class="blob blob-2"></div>
-
-            <div class="blob blob-3"></div>
-
-            <div class="blob blob-4"></div>
+        <div
+            class="blood-main"
+        ></div>
 
 
-            <div class="tendril tendril-left"></div>
+        <!-- BIG ROUNDED BLOBS -->
 
-            <div class="tendril tendril-right"></div>
+        <div
+            class="blood-blob blob-left"
+        ></div>
 
-            <div class="tendril tendril-top"></div>
+        <div
+            class="blood-blob blob-right"
+        ></div>
 
-            <div class="tendril tendril-bottom"></div>
+        <div
+            class="blood-blob blob-top"
+        ></div>
 
-        </div>
+        <div
+            class="blood-blob blob-bottom"
+        ></div>
 
 
-        <!-- DRIPS -->
+        <!-- PAINT ARMS -->
 
-        <div class="drip drip-1"></div>
+        <div
+            class="blood-arm arm-left"
+        ></div>
 
-        <div class="drip drip-2"></div>
+        <div
+            class="blood-arm arm-right"
+        ></div>
 
-        <div class="drip drip-3"></div>
+        <div
+            class="blood-arm arm-top"
+        ></div>
 
-        <div class="drip drip-4"></div>
 
-        <div class="drip drip-5"></div>
+        <!-- SMALL SPLASH DROPS -->
+
+        <div
+            class="splash-drop drop-1"
+        ></div>
+
+        <div
+            class="splash-drop drop-2"
+        ></div>
+
+        <div
+            class="splash-drop drop-3"
+        ></div>
+
+        <div
+            class="splash-drop drop-4"
+        ></div>
+
+        <div
+            class="splash-drop drop-5"
+        ></div>
+
+        <div
+            class="splash-drop drop-6"
+        ></div>
+
+
+        <!-- THICK DRIPS -->
+
+        <div
+            class="blood-drip drip-1"
+        ></div>
+
+        <div
+            class="blood-drip drip-2"
+        ></div>
+
+        <div
+            class="blood-drip drip-3"
+        ></div>
+
+        <div
+            class="blood-drip drip-4"
+        ></div>
+
+        <div
+            class="blood-drip drip-5"
+        ></div>
 
     </div>
 
@@ -867,9 +1001,7 @@
         </button>
 
 
-        <!-- ======================================
-             MESSAGE
-        ====================================== -->
+        <!-- BLOODY MESSAGE -->
 
         <div
             class="thanks-message"
@@ -931,41 +1063,41 @@
             try {
 
 
-                /* ==================================
-                   COPY BANK DETAILS
-                ================================== */
+                /* ==============================
+                   COPY
+                ============================== */
 
                 await navigator.clipboard.writeText(
                     dynamicText
                 );
 
 
-                /* ==================================
-                   CHANGE BUTTON TEXT
-                ================================== */
+                /* ==============================
+                   BUTTON
+                ============================== */
 
                 button.innerText =
                     "Copied!";
 
 
-                /* ==================================
-                   SPLAT
-                ================================== */
+                /* ==============================
+                   EXPLODE
+                ============================== */
 
                 blood.classList.add(
                     "active"
                 );
 
 
-                /* ==================================
-                   LET IT SIT FOR 3 SECONDS
-                ================================== */
+                /* ==============================
+                   LET THE BLOOD SIT
+                ============================== */
 
                 setTimeout(function() {
 
 
                     /*
-                       Blood begins disappearing.
+                        Blood starts disappearing.
                     */
 
                     blood.classList.add(
@@ -973,21 +1105,28 @@
                     );
 
 
-                    /*
-                       Message appears.
-                    */
+                }, 3000);
+
+
+                /* ==============================
+                   REVEAL MESSAGE AFTER BLOOD
+                   HAS MOSTLY DISAPPEARED
+                ============================== */
+
+                setTimeout(function() {
+
 
                     message.classList.add(
                         "show"
                     );
 
 
-                }, 3000);
+                }, 4400);
 
 
-                /* ==================================
+                /* ==============================
                    RESET BUTTON
-                ================================== */
+                ============================== */
 
                 setTimeout(function() {
 
