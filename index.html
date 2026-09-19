@@ -8,6 +8,10 @@
 
     <style>
 
+        /* ================================
+           PAGE / BACKGROUND
+        ================================= */
+
         html,
         body {
             margin: 0;
@@ -37,50 +41,50 @@
         }
 
 
-        /* -----------------------------------
+        /* ================================
            BUTTON POSITION
-        ----------------------------------- */
+        ================================= */
 
         .bank-container {
+
             position: absolute;
 
-            /*
-                Change this number to move
-                the button up or down.
+            /* Move button up/down here */
+            top: 40%;
 
-                Smaller = higher
-                Larger = lower
-            */
-
-            top: 48%;
-
+            /* Centre horizontally */
             left: 50%;
 
             transform: translate(-50%, -50%);
 
-            width: 280px;
+            /* Bigger button */
+            width: 340px;
         }
 
 
-        /* -----------------------------------
-           WHITE COPY BUTTON
-        ----------------------------------- */
+        /* ================================
+           COPY BUTTON
+        ================================= */
 
         .share-btn {
 
             width: 100%;
 
-            padding: 14px 20px;
+            /* Makes the button taller */
+            padding: 18px 24px;
 
+            /* White background */
             background: #ffffff;
 
+            /* Black text */
             color: #000000;
 
             border: none;
 
-            border-radius: 7px;
+            border-radius: 8px;
 
-            font-size: 16px;
+            /* Bigger text */
+            font-size: 19px;
 
             font-weight: 700;
 
@@ -89,26 +93,27 @@
             cursor: pointer;
 
             box-shadow:
-                0 4px 15px rgba(0, 0, 0, 0.5);
+                0 5px 18px rgba(0, 0, 0, 0.5);
 
             transition:
                 background 0.2s ease,
-                color 0.2s ease,
                 transform 0.1s ease;
         }
 
 
-        /* Hover effect */
+        /* ================================
+           HOVER
+        ================================= */
 
         .share-btn:hover {
 
             background: #eeeeee;
-
-            color: #000000;
         }
 
 
-        /* Pressed effect */
+        /* ================================
+           WHEN PRESSED
+        ================================= */
 
         .share-btn:active {
 
@@ -116,7 +121,9 @@
         }
 
 
-        /* After copying */
+        /* ================================
+           AFTER COPYING
+        ================================= */
 
         .share-btn.copied {
 
@@ -126,24 +133,24 @@
         }
 
 
-        /* -----------------------------------
-           MOBILE
-        ----------------------------------- */
+        /* ================================
+           PHONE / SMALL SCREEN
+        ================================= */
 
         @media (max-width: 600px) {
 
             .bank-container {
 
-                width: 240px;
+                width: 280px;
 
-                top: 48%;
+                top: 40%;
             }
 
             .share-btn {
 
-                font-size: 15px;
+                padding: 16px 20px;
 
-                padding: 13px 16px;
+                font-size: 17px;
             }
         }
 
@@ -154,10 +161,9 @@
 <body>
 
 
-    <!--
-        The bank details are stored here in
-        the JavaScript below but are NOT shown.
-    -->
+    <!-- =================================
+         COPY BANK DETAILS BUTTON
+    ================================= -->
 
     <div class="bank-container">
 
@@ -172,23 +178,39 @@
     </div>
 
 
+    <!-- =================================
+         JAVASCRIPT
+    ================================= -->
+
     <script>
 
         async function copyCombinedDetails() {
 
             /*
+                ==============================
                 YOUR BANK DETAILS
+                ==============================
+
+                Replace the Xs with your
+                actual account number.
             */
 
-            const name = "T X VAN DER BAR";
+            const name =
+                "T X VAN DER BAR";
 
-            const number = "12-XXXX-XXXXXXX-00";
+            const number =
+                "12-XXXX-XXXXXXX-00";
 
-            const reference = "AConjunction";
+            const reference =
+                "AConjunction";
 
 
             /*
-                This creates:
+                ==============================
+                TEXT THAT GETS COPIED
+                ==============================
+
+                It will copy:
 
                 T X VAN DER BAR
                 12-XXXX-XXXXXXX-00
@@ -199,29 +221,62 @@
                 `${name}\n${number}\n${reference}`;
 
 
+            /*
+                Find the button
+            */
+
             const button =
-                document.getElementById("copyDetailsBtn");
+                document.getElementById(
+                    "copyDetailsBtn"
+                );
 
 
             try {
+
+                /*
+                    Copy the bank details
+                    to the phone clipboard.
+                */
 
                 await navigator.clipboard.writeText(
                     dynamicText
                 );
 
 
-                button.innerText = "Copied!";
+                /*
+                    Show confirmation
+                */
 
+                button.innerText =
+                    "Copied!";
+
+                button.classList.add(
+                    "copied"
+                );
+
+
+                /*
+                    Return to normal after
+                    2.5 seconds.
+                */
 
                 setTimeout(function() {
 
                     button.innerText =
                         "Copy Bank Details";
 
+                    button.classList.remove(
+                        "copied"
+                    );
+
                 }, 2500);
 
 
             } catch (err) {
+
+                /*
+                    If copying doesn't work
+                */
 
                 console.error(
                     "Could not copy details:",
