@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en-NZ">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+!DOCTYPE html> <html lang="en-NZ"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Antithetical Conjunction - Payment Details</title>
+
+<!-- Silly meme font -->
+<link
+    href="https://fonts.googleapis.com/css2?family=Bangers&display=swap"
+    rel="stylesheet"
+>
 
 <style>
 
@@ -37,6 +38,9 @@
         min-height: 100vh;
 
         position: relative;
+
+        /* Prevent monster from creating
+           unwanted scrolling */
         overflow: hidden;
     }
 
@@ -96,17 +100,29 @@
     }
 
 
+    /* ================================
+       HOVER
+    ================================= */
+
     .share-btn:hover {
 
         background: #eeeeee;
     }
 
 
+    /* ================================
+       WHEN PRESSED
+    ================================= */
+
     .share-btn:active {
 
         transform: scale(0.97);
     }
 
+
+    /* ================================
+       COPIED BUTTON
+    ================================= */
 
     .share-btn.copied {
 
@@ -117,28 +133,32 @@
 
 
     /* ================================
-       THANK YOU MESSAGE
+       THANK YOU CONTAINER
     ================================= */
 
     .thank-you {
 
         position: absolute;
 
-        top: 52%;
+        top: 62%;
 
         left: 50%;
 
-        transform: translate(-50%, -50%) scale(0.7);
+        transform:
+            translate(-50%, -50%)
+            scale(0.7);
 
         display: flex;
+
+        flex-direction: column;
 
         align-items: center;
 
         justify-content: center;
 
-        gap: 18px;
+        gap: 8px;
 
-        width: min(90%, 600px);
+        width: 90%;
 
         opacity: 0;
 
@@ -154,45 +174,62 @@
     }
 
 
-    /* Monster image */
-
-    .thank-you img {
-
-        width: 150px;
-
-        height: auto;
-
-        flex-shrink: 0;
-
-        filter:
-            drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45));
-    }
-
-
-    /* Message */
+    /* ================================
+       SILLY THANK YOU TEXT
+    ================================= */
 
     .thank-you-message {
 
         color: white;
 
         font-family:
-            "Comic Sans MS",
-            "Comic Sans",
-            cursive;
+            "Bangers",
+            "Impact",
+            "Arial Black",
+            sans-serif;
 
-        font-size: clamp(24px, 4vw, 42px);
+        font-size:
+            clamp(30px, 6vw, 58px);
 
-        font-weight: 700;
+        line-height: 0.95;
 
-        line-height: 1.05;
+        text-align: center;
 
-        text-align: left;
+        text-transform: uppercase;
+
+        letter-spacing: 1px;
+
+        transform: rotate(-3deg);
 
         text-shadow:
-            3px 3px 0 #000,
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000;
+            5px 5px 0 #000000,
+            -2px -2px 0 #000000,
+            2px -2px 0 #000000,
+            -2px 2px 0 #000000;
+    }
+
+
+    /* ================================
+       BIG MONSTER
+    ================================= */
+
+    .thank-you img {
+
+        width: 280px;
+
+        max-width: 70vw;
+
+        height: auto;
+
+        display: block;
+
+        filter:
+            drop-shadow(
+                0 10px 10px rgba(0, 0, 0, 0.5)
+            );
+
+        animation:
+            monsterWiggle 2s ease-in-out infinite;
     }
 
 
@@ -209,6 +246,28 @@
         transform:
             translate(-50%, -50%)
             scale(1);
+    }
+
+
+    /* ================================
+       SILLY MONSTER WIGGLE
+    ================================= */
+
+    @keyframes monsterWiggle {
+
+        0% {
+            transform: rotate(-2deg);
+        }
+
+        50% {
+            transform:
+                rotate(2deg)
+                translateY(-5px);
+        }
+
+        100% {
+            transform: rotate(-2deg);
+        }
     }
 
 
@@ -236,25 +295,27 @@
 
         .thank-you {
 
-            top: 55%;
+            top: 62%;
 
-            gap: 10px;
+            width: 95%;
 
-            width: 94%;
-        }
-
-
-        .thank-you img {
-
-            width: 105px;
+            gap: 5px;
         }
 
 
         .thank-you-message {
 
-            font-size: 25px;
+            font-size: 32px;
 
-            text-align: left;
+            line-height: 0.9;
+        }
+
+
+        .thank-you img {
+
+            width: 250px;
+
+            max-width: 75vw;
         }
     }
 
@@ -282,17 +343,20 @@
      THANK YOU MESSAGE + MONSTER
 ================================= -->
 
-<div class="thank-you" id="thankYou">
-
-    <img
-        src="monsta-1.png"
-        alt="Silly monster"
-    >
+<div
+    class="thank-you"
+    id="thankYou"
+>
 
     <div class="thank-you-message">
         Thanks for supporting<br>
         live music :D
     </div>
+
+    <img
+        src="monsta-1.png"
+        alt="Silly monster"
+    >
 
 </div>
 
@@ -329,14 +393,18 @@
 
 
         /*
-            Find the button and
-            thank-you message
+            Find the button
         */
 
         const button =
             document.getElementById(
                 "copyDetailsBtn"
             );
+
+
+        /*
+            Find the thank-you section
+        */
 
         const thankYou =
             document.getElementById(
@@ -348,7 +416,7 @@
 
             /*
                 Copy the bank details
-                to the clipboard.
+                to the phone clipboard.
             */
 
             await navigator.clipboard.writeText(
@@ -369,8 +437,7 @@
 
 
             /*
-                Make the monster
-                and message appear.
+                Show monster + message
             */
 
             thankYou.classList.add(
@@ -423,5 +490,5 @@
     }
 
 </script>
-</body>
-</html>
+
+</body> </html>
