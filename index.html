@@ -11,15 +11,19 @@
     <title>Antithetical Conjunction - Payment Details</title>
 
 
-    <!-- Horror / blood-style font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- ==========================================
+         CARTOON FONT
+    ========================================== -->
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
 
     <link rel="preconnect"
         href="https://fonts.gstatic.com"
         crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bangers&display=swap"
         rel="stylesheet"
     >
 
@@ -69,7 +73,7 @@
 
 
         /* ==========================================
-           SINGLE BLOOD COLOUR
+           BLOOD COLOUR
         ========================================== */
 
         :root {
@@ -147,7 +151,7 @@
 
 
         /* ==========================================
-           BLOOD
+           BLOOD CONTAINER
         ========================================== */
 
         .blood {
@@ -175,7 +179,15 @@
 
 
         /* ==========================================
-           THE ACTUAL SPLAT
+           CARTOON SPLAT
+           
+           The splat is deliberately built from:
+           
+           - rounded central body
+           - thin arms
+           - bulbous tips
+           - irregular asymmetry
+           - no hanging drips
         ========================================== */
 
         .blood-splat {
@@ -185,9 +197,9 @@
             left: 50%;
             top: 40%;
 
-            width: min(1000px, 115vw);
+            width: min(900px, 105vw);
 
-            height: min(760px, 90vh);
+            height: min(700px, 85vh);
 
             transform:
                 translate(-50%, -50%)
@@ -225,17 +237,6 @@
         }
 
 
-        /*
-            IMPORTANT:
-
-            Every part of the SVG uses the exact
-            same colour.
-
-            No gradient.
-            No darker outer blobs.
-            No separate shades.
-        */
-
         .blood-shape {
 
             fill:
@@ -245,10 +246,7 @@
 
 
         /* ==========================================
-           STATIC BLOOD SPLASH DOTS
-           
-           These are OUTSIDE the main splat,
-           not floating inside it.
+           OUTER SPLASH DOTS
         ========================================== */
 
         .blood-dot {
@@ -409,6 +407,7 @@
             opacity: 0;
 
             transition:
+
                 transform
                 0.7s
                 ease-in,
@@ -469,7 +468,7 @@
 
 
         /* ==========================================
-           BLOOD FONT
+           CARTOON THANK-YOU FONT
         ========================================== */
 
         .thanks-text {
@@ -482,87 +481,42 @@
                 var(--blood);
 
             font-family:
-                "Nosifer",
+                "Bangers",
                 cursive;
 
             font-size:
-                21px;
+                29px;
 
             line-height:
-                1.45;
+                1.2;
 
             letter-spacing:
-                0.4px;
+                1px;
 
             text-shadow:
 
-                1px 2px 0
-                rgba(40, 0, 0, 0.8),
+                2px 3px 0
+                rgba(40, 0, 0, 0.85),
 
-                0 3px 6px
-                rgba(0, 0, 0, 0.4);
+                0 4px 7px
+                rgba(0, 0, 0, 0.35);
+
+            /* Slight cartoon tilt */
+            transform:
+                rotate(-1deg);
         }
 
 
-
-        /* ==========================================
-           STATIC DRIPS UNDER TEXT
-        ========================================== */
-
-        .thanks-text::before {
-
-            content: "";
-
-            position: absolute;
-
-            left: 8%;
-
-            bottom: -28px;
-
-            width: 9px;
-            height: 34px;
-
-            background:
-                var(--blood);
-
-            border-radius:
-                0 0 50% 50%;
-
-            box-shadow:
-
-                42px 7px 0 -1px
-                var(--blood),
-
-                92px 2px 0 -2px
-                var(--blood),
-
-                145px 8px 0 -2px
-                var(--blood),
-
-                198px 3px 0 -3px
-                var(--blood);
-        }
-
-
-        .thanks-text::after {
-
-            content: "";
-
-            position: absolute;
-
-            right: 7%;
-
-            bottom: -19px;
-
-            width: 7px;
-            height: 27px;
-
-            background:
-                var(--blood);
-
-            border-radius:
-                0 0 50% 50%;
-        }
+        /*
+            IMPORTANT:
+            
+            No ::before
+            No ::after
+            
+            This removes the static drips which previously
+            remained underneath the message after the blood
+            splat disappeared.
+        */
 
 
 
@@ -591,7 +545,8 @@
             .blood-splat {
 
                 width: 850px;
-                height: 680px;
+
+                height: 650px;
             }
 
 
@@ -603,7 +558,10 @@
 
             .thanks-text {
 
-                font-size: 16px;
+                font-size: 24px;
+
+                letter-spacing:
+                    0.8px;
             }
 
         }
@@ -626,165 +584,309 @@
     >
 
 
-        <!--
-            ONE SINGLE CONNECTED CARTOON SPLAT.
-
-            The shape is deliberately irregular:
-            - large rounded centre
-            - long pointed projections
-            - chunky side splashes
-            - uneven silhouette
-            - no circles in the middle
-            - no separate colour regions
-        -->
-
         <svg
             class="blood-splat"
             viewBox="0 0 1000 760"
             xmlns="http://www.w3.org/2000/svg"
         >
 
+            <!--
+                CARTOON SPLAT
+
+                The important difference from the original is
+                that the arms are narrow near the centre and
+                then open into rounded/bulbous ends.
+
+                Think:
+
+                    thin arm -----> fat rounded tip
+
+                rather than:
+
+                    large triangular spike
+            -->
+
             <path
                 class="blood-shape"
                 d="
 
-                M 500 125
+                M 500 235
 
-                C 555 105,
-                  600 135,
-                  625 175
+                /* ==================================
+                   TOP LEFT ARM
+                ================================== */
 
-                C 660 150,
-                  700 105,
-                  735 120
+                C 478 220,
+                  455 198,
+                  430 175
 
-                C 760 132,
-                  740 175,
-                  765 188
+                C 414 160,
+                  401 151,
+                  390 158
 
-                C 805 175,
-                  850 145,
-                  880 170
+                C 376 166,
+                  381 184,
+                  392 197
 
-                C 903 190,
-                  865 225,
-                  895 245
+                C 410 218,
+                  428 232,
+                  445 248
 
-                C 930 250,
-                  972 240,
-                  982 270
 
-                C 990 298,
-                  945 315,
-                  960 340
+                /* ==================================
+                   LEFT-UPPER ARM
+                ================================== */
 
-                C 980 365,
-                  1005 400,
-                  982 420
+                C 420 240,
+                  390 225,
+                  360 205
 
-                C 965 438,
-                  920 420,
-                  905 448
+                C 340 192,
+                  320 190,
+                  312 204
 
-                C 930 470,
-                  955 505,
-                  935 528
+                C 303 219,
+                  316 233,
+                  334 241
 
-                C 915 550,
-                  870 520,
-                  850 545
+                C 365 254,
+                  400 260,
+                  430 266
 
-                C 840 575,
-                  875 625,
-                  840 645
 
-                C 810 662,
-                  775 620,
-                  745 630
+                /* ==================================
+                   LEFT ARM
+                ================================== */
 
-                C 720 665,
-                  700 715,
-                  665 710
+                C 395 272,
+                  350 270,
+                  310 264
 
-                C 630 705,
-                  645 655,
-                  610 645
+                C 278 260,
+                  252 266,
+                  250 284
 
-                C 585 680,
-                  555 735,
-                  520 720
+                C 248 303,
+                  271 312,
+                  296 313
 
-                C 485 705,
-                  505 655,
-                  475 645
+                C 340 315,
+                  383 303,
+                  425 298
 
-                C 440 675,
-                  400 720,
-                  370 700
 
-                C 340 680,
-                  375 635,
-                  345 615
+                /* ==================================
+                   LEFT-LOWER ARM
+                ================================== */
 
-                C 310 625,
-                  255 655,
-                  240 625
+                C 395 320,
+                  365 340,
+                  338 365
 
-                C 225 595,
-                  275 565,
-                  260 535
+                C 317 385,
+                  313 404,
+                  327 413
 
-                C 220 540,
-                  165 560,
-                  150 525
+                C 342 422,
+                  357 410,
+                  370 395
 
-                C 138 495,
-                  190 470,
-                  170 440
+                C 394 369,
+                  414 342,
+                  438 323
 
-                C 135 435,
-                  85 450,
-                  75 415
 
-                C 66 382,
-                  115 365,
-                  105 335
+                /* ==================================
+                   LOWER-LEFT ARM
+                ================================== */
 
-                C 72 320,
-                  28 305,
-                  35 270
+                C 423 355,
+                  405 390,
+                  397 420
 
-                C 42 235,
-                  95 245,
-                  112 215
+                C 391 446,
+                  398 463,
+                  414 466
 
-                C 90 185,
-                  78 145,
-                  108 128
+                C 431 468,
+                  440 450,
+                  443 430
 
-                C 138 110,
-                  170 150,
-                  205 140
+                C 447 397,
+                  454 367,
+                  462 340
 
-                C 215 105,
-                  215 60,
-                  250 58
 
-                C 285 56,
-                  290 108,
-                  325 112
+                /* ==================================
+                   LOWER ARM
+                ================================== */
 
-                C 355 85,
-                  390 40,
-                  420 58
+                C 465 380,
+                  458 422,
+                  462 455
 
-                C 450 75,
-                  435 115,
-                  465 130
+                C 466 485,
+                  480 502,
+                  498 499
 
-                C 475 128,
-                  488 126,
-                  500 125
+                C 516 496,
+                  521 477,
+                  518 453
+
+                C 514 415,
+                  507 380,
+                  505 345
+
+
+                /* ==================================
+                   LOWER-RIGHT ARM
+                ================================== */
+
+                C 525 375,
+                  543 407,
+                  557 438
+
+                C 568 463,
+                  583 474,
+                  596 465
+
+                C 610 455,
+                  605 438,
+                  593 420
+
+                C 575 391,
+                  555 361,
+                  540 332
+
+
+                /* ==================================
+                   RIGHT-LOWER ARM
+                ================================== */
+
+                C 567 352,
+                  595 376,
+                  620 400
+
+                C 640 419,
+                  659 422,
+                  668 409
+
+                C 677 395,
+                  665 380,
+                  649 368
+
+                C 625 350,
+                  596 328,
+                  572 309
+
+
+                /* ==================================
+                   RIGHT ARM
+                ================================== */
+
+                C 610 316,
+                  650 323,
+                  689 334
+
+                C 718 342,
+                  740 338,
+                  745 321
+
+                C 750 304,
+                  731 294,
+                  708 292
+
+                C 669 289,
+                  632 293,
+                  596 289
+
+
+                /* ==================================
+                   RIGHT-UPPER ARM
+                ================================== */
+
+                C 628 273,
+                  660 258,
+                  692 247
+
+                C 717 239,
+                  730 226,
+                  724 211
+
+                C 718 196,
+                  698 195,
+                  680 202
+
+                C 647 214,
+                  618 232,
+                  585 247
+
+
+                /* ==================================
+                   TOP-RIGHT ARM
+                ================================== */
+
+                C 600 224,
+                  615 200,
+                  633 177
+
+                C 647 158,
+                  648 141,
+                  635 132
+
+                C 621 122,
+                  606 133,
+                  596 149
+
+                C 579 176,
+                  568 202,
+                  555 229
+
+
+                /* ==================================
+                   CENTRAL TOP
+                ================================== */
+
+                C 545 214,
+                  530 205,
+                  514 205
+
+                C 492 205,
+                  475 216,
+                  465 235
+
+
+                /* ==================================
+                   CENTRAL BODY
+                ================================== */
+
+                C 432 245,
+                  414 274,
+                  420 306
+
+                C 425 336,
+                  448 356,
+                  474 365
+
+                C 458 390,
+                  470 420,
+                  500 427
+
+                C 530 434,
+                  550 414,
+                  548 385
+
+                C 575 375,
+                  592 348,
+                  584 318
+
+                C 577 289,
+                  557 264,
+                  530 250
+
+                C 520 239,
+                  510 232,
+                  500 235
 
                 Z
                 "
@@ -989,6 +1091,7 @@
             }
 
         }
+
 
     </script>
 
