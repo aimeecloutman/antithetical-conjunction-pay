@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -28,7 +30,6 @@
                 Roboto,
                 sans-serif;
 
-            /* Your artwork */
             background-image: url("image-1024.jpg");
 
             background-size: cover;
@@ -49,15 +50,12 @@
 
             position: absolute;
 
-            /* Move button up/down here */
             top: 40%;
 
-            /* Centre horizontally */
             left: 50%;
 
             transform: translate(-50%, -50%);
 
-            /* Button width */
             width: 240px;
         }
 
@@ -70,20 +68,16 @@
 
             width: 100%;
 
-            /* Button height */
             padding: 24px 24px;
 
-            /* White background */
             background: #ffffff;
 
-            /* Black text */
             color: #000000;
 
             border: none;
 
             border-radius: 8px;
 
-            /* Text size */
             font-size: 19px;
 
             font-weight: 700;
@@ -122,7 +116,7 @@
 
 
         /* ================================
-           AFTER COPYING
+           COPIED BUTTON
         ================================= */
 
         .share-btn.copied {
@@ -134,6 +128,179 @@
 
 
         /* ================================
+           COPIED MESSAGE
+        ================================= */
+
+        .copied-message {
+
+            display: none;
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            animation:
+                appear 0.4s ease-out forwards;
+        }
+
+
+        .copied-message.show {
+
+            display: block;
+        }
+
+
+        /* ================================
+           BLOOD TEXT
+        ================================= */
+
+        .blood-text {
+
+            color: #8b0000;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 34px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                2px 2px 0 #300000,
+                0 0 8px rgba(120, 0, 0, 0.7);
+
+            position: relative;
+        }
+
+
+        /* ================================
+           DRIPS
+        ================================= */
+
+        .blood-text::after {
+
+            content: "●  ●  ●";
+
+            display: block;
+
+            color: #8b0000;
+
+            font-size: 13px;
+
+            letter-spacing: 12px;
+
+            margin-top: -5px;
+        }
+
+
+        /* ================================
+           THANK YOU MESSAGE
+        ================================= */
+
+        .thanks-text {
+
+            margin-top: 8px;
+
+            color: white;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            text-shadow:
+                1px 1px 3px black;
+        }
+
+
+        /* ================================
+           BLOOD SPLATS
+        ================================= */
+
+        .blood-splat {
+
+            position: fixed;
+
+            width: 12px;
+            height: 12px;
+
+            background: #8b0000;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: 100;
+
+            animation:
+                splatter 0.8s ease-out forwards;
+        }
+
+
+        /* ================================
+           SPLATTER ANIMATION
+        ================================= */
+
+        @keyframes splatter {
+
+            0% {
+
+                transform:
+                    translate(0, 0)
+                    scale(0);
+
+                opacity: 1;
+            }
+
+            60% {
+
+                opacity: 1;
+            }
+
+            100% {
+
+                transform:
+                    translate(var(--x), var(--y))
+                    scale(1.5);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* ================================
+           MESSAGE APPEAR
+        ================================= */
+
+        @keyframes appear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.7);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1);
+            }
+        }
+
+
+        /* ================================
            PHONE / SMALL SCREEN
         ================================= */
 
@@ -141,7 +308,7 @@
 
             .bank-container {
 
-                width: 225=px;
+                width: 225px;
 
                 top: 30%;
             }
@@ -152,9 +319,20 @@
 
                 font-size: 17px;
             }
+
+            .blood-text {
+
+                font-size: 30px;
+            }
+
+            .thanks-text {
+
+                font-size: 14px;
+            }
         }
 
     </style>
+
 </head>
 
 
@@ -162,7 +340,7 @@
 
 
     <!-- =================================
-         COPY BANK DETAILS BUTTON
+         COPY BANK DETAILS
     ================================= -->
 
     <div class="bank-container">
@@ -175,6 +353,26 @@
             Copy Bank Details
         </button>
 
+
+        <!-- =================================
+             HORROR CONFIRMATION
+        ================================= -->
+
+        <div
+            class="copied-message"
+            id="copiedMessage"
+        >
+
+            <div class="blood-text">
+                COPIED!
+            </div>
+
+            <div class="thanks-text">
+                Thanks for supporting live music :)
+            </div>
+
+        </div>
+
     </div>
 
 
@@ -184,7 +382,13 @@
 
     <script>
 
+
+        /* ================================
+           COPY BANK DETAILS
+        ================================= */
+
         async function copyCombinedDetails() {
+
 
             /*
                 ==============================
@@ -203,11 +407,6 @@
                 ==============================
                 TEXT THAT GETS COPIED
                 ==============================
-
-                It will copy:
-
-                T VAN DER BAR
-                38-9005-0490046-02
             */
 
             const dynamicText =
@@ -224,11 +423,23 @@
                 );
 
 
+            /*
+                Find the message
+            */
+
+            const message =
+                document.getElementById(
+                    "copiedMessage"
+                );
+
+
             try {
 
+
                 /*
-                    Copy the bank details
-                    to the phone clipboard.
+                    ==========================
+                    COPY BANK DETAILS
+                    ==========================
                 */
 
                 await navigator.clipboard.writeText(
@@ -237,7 +448,9 @@
 
 
                 /*
-                    Show confirmation
+                    ==========================
+                    CHANGE BUTTON
+                    ==========================
                 */
 
                 button.innerText =
@@ -249,8 +462,29 @@
 
 
                 /*
-                    Return to normal after
-                    2.5 seconds.
+                    ==========================
+                    SHOW HORROR MESSAGE
+                    ==========================
+                */
+
+                message.classList.add(
+                    "show"
+                );
+
+
+                /*
+                    ==========================
+                    CREATE BLOOD SPLATTER
+                    ==========================
+                */
+
+                createBloodSplatter();
+
+
+                /*
+                    ==========================
+                    RESET BUTTON
+                    ==========================
                 */
 
                 setTimeout(function() {
@@ -265,10 +499,16 @@
                 }, 2500);
 
 
-            } catch (err) {
+            }
+
+
+            catch (err) {
+
 
                 /*
-                    If copying doesn't work
+                    ==========================
+                    COPY FAILED
+                    ==========================
                 */
 
                 console.error(
@@ -292,7 +532,152 @@
 
         }
 
+
+        /* ================================
+           BLOOD SPLATTER GENERATOR
+        ================================= */
+
+        function createBloodSplatter() {
+
+
+            const button =
+                document.getElementById(
+                    "copyDetailsBtn"
+                );
+
+
+            const rect =
+                button.getBoundingClientRect();
+
+
+            /*
+                Create 35 individual
+                blood droplets
+            */
+
+            for (
+                let i = 0;
+                i < 35;
+                i++
+            ) {
+
+
+                const splat =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                splat.classList.add(
+                    "blood-splat"
+                );
+
+
+                /*
+                    Start from centre
+                    of button
+                */
+
+                splat.style.left =
+                    rect.left +
+                    rect.width / 2 +
+                    "px";
+
+
+                splat.style.top =
+                    rect.top +
+                    rect.height / 2 +
+                    "px";
+
+
+                /*
+                    Random direction
+                */
+
+                const angle =
+                    Math.random() *
+                    Math.PI *
+                    2;
+
+
+                /*
+                    Random distance
+                */
+
+                const distance =
+                    60 +
+                    Math.random() *
+                    180;
+
+
+                /*
+                    Horizontal movement
+                */
+
+                splat.style.setProperty(
+                    "--x",
+                    Math.cos(angle) *
+                    distance +
+                    "px"
+                );
+
+
+                /*
+                    Vertical movement
+                */
+
+                splat.style.setProperty(
+                    "--y",
+                    Math.sin(angle) *
+                    distance +
+                    "px"
+                );
+
+
+                /*
+                    Random droplet size
+                */
+
+                splat.style.width =
+                    5 +
+                    Math.random() *
+                    15 +
+                    "px";
+
+
+                splat.style.height =
+                    5 +
+                    Math.random() *
+                    15 +
+                    "px";
+
+
+                /*
+                    Add to page
+                */
+
+                document.body.appendChild(
+                    splat
+                );
+
+
+                /*
+                    Remove after animation
+                */
+
+                setTimeout(function() {
+
+                    splat.remove();
+
+                }, 900);
+
+            }
+
+        }
+
     </script>
 
+
 </body>
+
 </html>
