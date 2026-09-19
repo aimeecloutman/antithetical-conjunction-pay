@@ -185,8 +185,13 @@
 
             left: 50%;
 
+            /*
+               Slightly moved to the right
+               from -50% to -47%
+            */
+
             transform:
-                translate(-50%, -50%)
+                translate(-47%, -50%)
                 scale(0.7);
 
             display: flex;
@@ -262,15 +267,13 @@
         .thank-you img {
 
             /*
-               Increased from 700px
-               to 1000px
+               Large monster
             */
 
             width: 1000px;
 
             /*
-               Allows it to become much larger
-               on big screens
+               Keeps it responsive
             */
 
             max-width: 95vw;
@@ -303,8 +306,12 @@
 
             visibility: visible;
 
+            /*
+               Slightly moved to the right
+            */
+
             transform:
-                translate(-50%, -50%)
+                translate(-47%, -50%)
                 scale(1);
 
         }
@@ -349,6 +356,7 @@
 
         @media (max-width: 600px) {
 
+
             .bank-container {
 
                 width: 225px;
@@ -375,6 +383,14 @@
 
                 gap: 5px;
 
+                /*
+                   Keep the slight right shift
+                */
+
+                transform:
+                    translate(-47%, -50%)
+                    scale(0.7);
+
             }
 
 
@@ -389,14 +405,18 @@
 
             .thank-you img {
 
-                /*
-                   Monster now fills much more
-                   of the phone screen
-                */
-
                 width: 1000px;
 
                 max-width: 95vw;
+
+            }
+
+
+            .thank-you.show {
+
+                transform:
+                    translate(-47%, -50%)
+                    scale(1);
 
             }
 
