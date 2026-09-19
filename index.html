@@ -4,23 +4,29 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Antithetical Conjunction - Payment Details</title>
 
     <style>
 
-        /* =================================
+
+        /* ==========================================
            PAGE
-        ================================= */
+        ========================================== */
 
         html,
         body {
+
             margin: 0;
             padding: 0;
+
             width: 100%;
             height: 100%;
         }
+
 
         body {
 
@@ -35,20 +41,23 @@
                 url("image-1024.jpg");
 
             background-size: cover;
+
             background-position: center;
+
             background-repeat: no-repeat;
 
             min-height: 100vh;
 
-            position: relative;
-
             overflow: hidden;
+
+            position: relative;
         }
 
 
-        /* =================================
+
+        /* ==========================================
            BUTTON CONTAINER
-        ================================= */
+        ========================================== */
 
         .bank-container {
 
@@ -63,13 +72,14 @@
 
             width: 240px;
 
-            z-index: 50;
+            z-index: 100;
         }
 
 
-        /* =================================
+
+        /* ==========================================
            BUTTON
-        ================================= */
+        ========================================== */
 
         .share-btn {
 
@@ -77,9 +87,9 @@
 
             padding: 24px;
 
-            background: #ffffff;
+            background: white;
 
-            color: #000000;
+            color: black;
 
             border: none;
 
@@ -89,8 +99,6 @@
 
             font-weight: 700;
 
-            letter-spacing: 0.2px;
-
             cursor: pointer;
 
             box-shadow:
@@ -99,7 +107,10 @@
 
             position: relative;
 
-            z-index: 60;
+            z-index: 200;
+
+            transition:
+                background 0.2s ease;
         }
 
 
@@ -111,513 +122,609 @@
 
         .share-btn:active {
 
-            transform:
-                scale(0.97);
+            transform: scale(0.97);
         }
 
 
-        /* =================================
-           THANK YOU MESSAGE
-        ================================= */
 
-        .thanks-message {
+        /* ==========================================
+           LIQUID BLOOD CONTAINER
+        ========================================== */
 
-            position: absolute;
-
-            top: calc(100% + 30px);
-
-            left: 50%;
-
-            transform:
-                translateX(-50%);
-
-            width: 360px;
-
-            text-align: center;
-
-            opacity: 0;
-
-            z-index: 40;
-
-            pointer-events: none;
-
-            transition:
-                opacity 1.5s ease;
-        }
-
-
-        .thanks-message.revealed {
-
-            opacity: 1;
-        }
-
-
-        /* =================================
-           BLOODY TEXT
-        ================================= */
-
-        .blood-writing {
-
-            color: #750000;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size: 25px;
-
-            font-weight: 900;
-
-            line-height: 1.15;
-
-            letter-spacing: 1px;
-
-            text-transform: none;
-
-            text-shadow:
-                1px 2px 0 #3b0000,
-                0 3px 5px
-                rgba(0, 0, 0, 0.8);
-
-            position: relative;
-        }
-
-
-        /*
-            Little blood drips hanging
-            from the lettering.
-        */
-
-        .blood-writing::after {
-
-            content: "";
-
-            position: absolute;
-
-            left: 22%;
-
-            bottom: -18px;
-
-            width: 9px;
-
-            height: 25px;
-
-            background:
-                linear-gradient(
-                    to bottom,
-                    #750000,
-                    #520000
-                );
-
-            border-radius:
-                0 0 50% 50%;
-        }
-
-
-        /* =================================
-           HUGE BLOOD SPLAT
-        ================================= */
-
-        .blood-splat {
+        .blood {
 
             position: fixed;
 
-            left: 50%;
+            inset: 0;
 
-            top: 40%;
+            width: 100vw;
 
-            width: 0;
+            height: 100vh;
 
-            height: 0;
-
-            z-index: 30;
+            z-index: 50;
 
             pointer-events: none;
+
+            opacity: 0;
+
+            transform:
+                scale(0.05);
+
+            transform-origin:
+                50% 40%;
+
+            transition:
+                transform 0.65s
+                cubic-bezier(.1,.8,.2,1),
+
+                opacity 0.2s ease;
         }
 
 
         /*
-            Main giant irregular blob
+            Activated after clicking.
         */
 
-        .blood-splat::before {
+        .blood.active {
 
-            content: "";
-
-            position: absolute;
-
-            width: 650px;
-
-            height: 520px;
-
-            left: -325px;
-
-            top: -260px;
-
-            background:
-
-                radial-gradient(
-                    ellipse at 48% 45%,
-                    #a40000 0%,
-                    #8b0000 45%,
-                    #680000 75%,
-                    #4b0000 100%
-                );
-
-            border-radius:
-                47% 53% 42% 58%
-                /
-                55% 43% 57% 45%;
-
-            box-shadow:
-
-                0 15px 25px
-                rgba(0, 0, 0, 0.35);
-
-            transform:
-                scale(0);
-
-            opacity: 0;
-
-            transition:
-                transform 0.35s
-                cubic-bezier(.1,.8,.2,1),
-                opacity 0.25s ease;
-        }
-
-
-        /* =================================
-           SPLAT EXPLOSION
-        ================================= */
-
-        .blood-splat.explode::before {
+            opacity: 1;
 
             transform:
                 scale(1);
-
-            opacity: 1;
         }
 
 
-        /* =================================
-           BLOOD ARMS / SPLASHES
-        ================================= */
 
-        .splat-arm {
+        /* ==========================================
+           MAIN LIQUID SHAPE
+        ========================================== */
 
-            position: fixed;
+        .blood-liquid {
 
-            width: 240px;
+            position: absolute;
 
-            height: 90px;
+            left: -5%;
+
+            bottom: -5%;
+
+            width: 110%;
+
+            height: 90%;
 
             background:
-                #820000;
 
-            z-index: 31;
+                linear-gradient(
+                    180deg,
+                    #a30000 0%,
+                    #850000 35%,
+                    #650000 70%,
+                    #430000 100%
+                );
 
-            pointer-events: none;
+            /*
+                This is the important part
+                borrowed from your example.
+            */
 
-            opacity: 0;
+            clip-path:
+                polygon(
+                    0% 42%,
+                    8% 39%,
+                    17% 43%,
+                    27% 36%,
+                    38% 43%,
+                    49% 34%,
+                    61% 42%,
+                    72% 35%,
+                    83% 41%,
+                    92% 34%,
+                    100% 40%,
 
-            transform-origin:
-                center;
-
-            border-radius:
-                70% 30% 60% 40%;
-        }
-
-
-        .splat-arm.one {
-
-            left: 4%;
-
-            top: 38%;
-
-            transform:
-                rotate(-18deg)
-                scale(0);
-
-        }
-
-
-        .splat-arm.two {
-
-            right: 2%;
-
-            top: 30%;
+                    100% 100%,
+                    0% 100%
+                );
 
             transform:
-                rotate(20deg)
-                scale(0);
+                translateY(110%);
 
-        }
-
-
-        .splat-arm.three {
-
-            left: 15%;
-
-            top: 15%;
-
-            width: 180px;
-
-            height: 70px;
-
-            transform:
-                rotate(25deg)
-                scale(0);
-
-        }
-
-
-        .splat-arm.four {
-
-            right: 12%;
-
-            top: 62%;
-
-            width: 210px;
-
-            height: 80px;
-
-            transform:
-                rotate(-25deg)
-                scale(0);
-
-        }
-
-
-        .blood-splat.explode
-        ~ .splat-arm {
-
-            opacity: 1;
+            transition:
+                transform 0.9s
+                cubic-bezier(.12,.75,.2,1);
 
             animation:
-                armExplosion
-                0.45s
-                cubic-bezier(.1,.8,.2,1)
-                forwards;
+                bloodWave 3s
+                ease-in-out
+                infinite alternate;
         }
 
 
-        @keyframes armExplosion {
+        .blood.active
+        .blood-liquid {
+
+            transform:
+                translateY(0);
+        }
+
+
+
+        /* ==========================================
+           LIQUID WAVE
+        ========================================== */
+
+        @keyframes bloodWave {
 
             0% {
 
-                transform:
-                    scale(0);
+                clip-path:
+                    polygon(
+                        0% 42%,
+                        8% 39%,
+                        17% 43%,
+                        27% 36%,
+                        38% 43%,
+                        49% 34%,
+                        61% 42%,
+                        72% 35%,
+                        83% 41%,
+                        92% 34%,
+                        100% 40%,
+
+                        100% 100%,
+                        0% 100%
+                    );
             }
+
+
+            50% {
+
+                clip-path:
+                    polygon(
+                        0% 50%,
+                        9% 45%,
+                        18% 48%,
+                        29% 42%,
+                        39% 49%,
+                        50% 40%,
+                        62% 47%,
+                        73% 39%,
+                        84% 46%,
+                        93% 40%,
+                        100% 45%,
+
+                        100% 100%,
+                        0% 100%
+                    );
+            }
+
 
             100% {
 
-                transform:
-                    scale(1);
+                clip-path:
+                    polygon(
+                        0% 38%,
+                        9% 43%,
+                        18% 36%,
+                        28% 45%,
+                        39% 37%,
+                        50% 45%,
+                        61% 35%,
+                        72% 44%,
+                        84% 37%,
+                        93% 43%,
+                        100% 36%,
+
+                        100% 100%,
+                        0% 100%
+                    );
             }
         }
 
 
-        /* =================================
-           THICK BLOOD DRIPS
-        ================================= */
+
+        /* ==========================================
+           SECOND LIQUID LAYER
+        ========================================== */
+
+        .blood-liquid-back {
+
+            position: absolute;
+
+            left: -10%;
+
+            bottom: 5%;
+
+            width: 120%;
+
+            height: 82%;
+
+            background:
+                #570000;
+
+            opacity: 0.7;
+
+            clip-path:
+                polygon(
+                    0% 50%,
+                    12% 44%,
+                    23% 48%,
+                    35% 40%,
+                    48% 47%,
+                    61% 39%,
+                    74% 47%,
+                    87% 41%,
+                    100% 48%,
+
+                    100% 100%,
+                    0% 100%
+                );
+
+            transform:
+                translateY(110%);
+
+            transition:
+                transform 1.1s
+                cubic-bezier(.1,.7,.2,1);
+
+            animation:
+                backWave 4s
+                ease-in-out
+                infinite alternate;
+        }
+
+
+        .blood.active
+        .blood-liquid-back {
+
+            transform:
+                translateY(0);
+        }
+
+
+
+        @keyframes backWave {
+
+            0% {
+
+                clip-path:
+                    polygon(
+                        0% 50%,
+                        12% 44%,
+                        23% 48%,
+                        35% 40%,
+                        48% 47%,
+                        61% 39%,
+                        74% 47%,
+                        87% 41%,
+                        100% 48%,
+
+                        100% 100%,
+                        0% 100%
+                    );
+            }
+
+
+            100% {
+
+                clip-path:
+                    polygon(
+                        0% 43%,
+                        12% 49%,
+                        23% 42%,
+                        35% 50%,
+                        48% 41%,
+                        61% 48%,
+                        74% 40%,
+                        87% 49%,
+                        100% 42%,
+
+                        100% 100%,
+                        0% 100%
+                    );
+            }
+        }
+
+
+
+        /* ==========================================
+           HUGE DRIPS
+        ========================================== */
+
+        .drips {
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: 0;
+
+            width: 100%;
+
+            height: 60%;
+
+            pointer-events: none;
+        }
+
 
         .drip {
 
-            position: fixed;
+            position: absolute;
 
-            z-index: 32;
+            top: 0;
+
+            width: var(--width);
+
+            height: var(--height);
+
+            left: var(--left);
 
             background:
                 linear-gradient(
-                    to bottom,
-                    #8b0000,
+                    180deg,
+                    #850000,
                     #650000
                 );
 
             border-radius:
                 0 0 50% 50%;
 
-            pointer-events: none;
-
-            transform-origin: top;
-
             transform:
                 scaleY(0);
 
+            transform-origin:
+                top;
+
+            transition:
+                transform
+                1.4s
+                cubic-bezier(.2,.8,.2,1);
+
+            box-shadow:
+                3px 4px 8px
+                rgba(0,0,0,0.25);
+        }
+
+
+        .blood.active .drip {
+
+            transform:
+                scaleY(1);
+        }
+
+
+
+        /* ==========================================
+           DRIP POSITIONS
+        ========================================== */
+
+        .drip:nth-child(1) {
+
+            --left: 12%;
+
+            --width: 34px;
+
+            --height: 210px;
+
+            transition-delay: .15s;
+        }
+
+
+        .drip:nth-child(2) {
+
+            --left: 27%;
+
+            --width: 19px;
+
+            --height: 150px;
+
+            transition-delay: .35s;
+        }
+
+
+        .drip:nth-child(3) {
+
+            --left: 41%;
+
+            --width: 45px;
+
+            --height: 290px;
+
+            transition-delay: .1s;
+        }
+
+
+        .drip:nth-child(4) {
+
+            --left: 57%;
+
+            --width: 24px;
+
+            --height: 180px;
+
+            transition-delay: .45s;
+        }
+
+
+        .drip:nth-child(5) {
+
+            --left: 70%;
+
+            --width: 40px;
+
+            --height: 240px;
+
+            transition-delay: .25s;
+        }
+
+
+        .drip:nth-child(6) {
+
+            --left: 87%;
+
+            --width: 25px;
+
+            --height: 170px;
+
+            transition-delay: .4s;
+        }
+
+
+
+        /* ==========================================
+           BLOODY MESSAGE
+        ========================================== */
+
+        .thanks-message {
+
+            position: absolute;
+
+            top:
+                calc(100% + 30px);
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            width: 330px;
+
+            text-align: center;
+
             opacity: 0;
+
+            z-index: 80;
+
+            transition:
+                opacity 1.5s ease;
         }
 
 
-        .drip.one {
-
-            left: 34%;
-
-            top: 55%;
-
-            width: 28px;
-
-            height: 230px;
-        }
-
-
-        .drip.two {
-
-            left: 43%;
-
-            top: 58%;
-
-            width: 16px;
-
-            height: 160px;
-        }
-
-
-        .drip.three {
-
-            left: 51%;
-
-            top: 57%;
-
-            width: 35px;
-
-            height: 300px;
-        }
-
-
-        .drip.four {
-
-            left: 61%;
-
-            top: 54%;
-
-            width: 19px;
-
-            height: 190px;
-        }
-
-
-        .drip.five {
-
-            left: 70%;
-
-            top: 50%;
-
-            width: 27px;
-
-            height: 250px;
-        }
-
-
-        .blood-splat.explode
-        ~ .drip {
+        .thanks-message.show {
 
             opacity: 1;
-
-            animation:
-                dripDown
-                2s
-                ease-out
-                forwards;
         }
 
 
-        @keyframes dripDown {
+        .thanks-text {
 
-            0% {
+            color:
+                #760000;
 
-                transform:
-                    scaleY(0);
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
 
-                opacity: 0;
-            }
+            font-size:
+                23px;
 
-            20% {
+            font-weight:
+                900;
 
-                opacity: 1;
-            }
+            line-height:
+                1.25;
 
-            100% {
+            text-shadow:
 
-                transform:
-                    scaleY(1);
+                1px 2px 0 #350000,
 
-                opacity: 1;
-            }
+                0 3px 5px
+                rgba(0,0,0,0.7);
+
+            position: relative;
+
+            display: inline-block;
         }
 
 
-        /* =================================
-           BLOOD DISAPPEARS
-        ================================= */
+        /*
+            Little hanging blood drops
+            attached to the lettering.
+        */
 
-        .blood-splat.fade {
+        .thanks-text::before {
+
+            content:
+                "";
+
+            position: absolute;
+
+            width: 8px;
+
+            height: 22px;
+
+            background:
+                #760000;
+
+            left: 19%;
+
+            bottom: -16px;
+
+            border-radius:
+                0 0 50% 50%;
+        }
+
+
+        .thanks-text::after {
+
+            content:
+                "";
+
+            position: absolute;
+
+            width: 5px;
+
+            height: 14px;
+
+            background:
+                #760000;
+
+            right: 24%;
+
+            bottom: -10px;
+
+            border-radius:
+                0 0 50% 50%;
+        }
+
+
+
+        /* ==========================================
+           DRAINING EFFECT
+        ========================================== */
+
+        .blood.draining {
 
             animation:
-                bloodFade
+                fadeBlood
                 3s
                 ease-in
                 forwards;
         }
 
 
-        .blood-splat.fade::before {
-
-            animation:
-                mainBloodFade
-                3s
-                ease-in
-                forwards;
-        }
-
-
-        @keyframes bloodFade {
-
-            from {
-
-                opacity: 1;
-            }
-
-            to {
-
-                opacity: 0;
-            }
-        }
-
-
-        @keyframes mainBloodFade {
+        @keyframes fadeBlood {
 
             0% {
 
                 opacity: 1;
-
-                transform:
-                    scale(1);
             }
 
-            60% {
+            50% {
 
-                opacity: 0.8;
-
-                transform:
-                    scale(1.02)
-                    translateY(20px);
+                opacity: 0.85;
             }
 
             100% {
 
                 opacity: 0;
-
-                transform:
-                    scale(1.05)
-                    translateY(60px);
             }
         }
 
 
-        /* =================================
+
+        /* ==========================================
            MOBILE
-        ================================= */
+        ========================================== */
 
         @media (max-width: 600px) {
 
@@ -637,63 +744,59 @@
             }
 
 
-            .blood-splat::before {
-
-                width: 430px;
-
-                height: 420px;
-
-                left: -215px;
-
-                top: -210px;
-            }
-
-
             .thanks-message {
 
                 width: 280px;
-
-                top:
-                    calc(100% + 25px);
             }
 
 
-            .blood-writing {
+            .thanks-text {
 
-                font-size: 21px;
+                font-size: 19px;
             }
 
 
-            .splat-arm {
+            .blood-liquid {
 
-                display: none;
+                height: 85%;
             }
 
 
-            .drip.one {
+            .drip:nth-child(1) {
 
-                left: 25%;
+                --left: 10%;
             }
 
-            .drip.two {
 
-                left: 38%;
+            .drip:nth-child(2) {
+
+                --left: 25%;
             }
 
-            .drip.three {
 
-                left: 50%;
+            .drip:nth-child(3) {
+
+                --left: 40%;
             }
 
-            .drip.four {
 
-                left: 63%;
+            .drip:nth-child(4) {
+
+                --left: 55%;
             }
 
-            .drip.five {
 
-                left: 75%;
+            .drip:nth-child(5) {
+
+                --left: 72%;
             }
+
+
+            .drip:nth-child(6) {
+
+                --left: 88%;
+            }
+
         }
 
     </style>
@@ -704,40 +807,49 @@
 <body>
 
 
-    <!-- =================================
-         HUGE BLOOD SPLAT
-    ================================= -->
+    <!-- ==========================================
+         BLOOD EFFECT
+    ========================================== -->
 
     <div
-        class="blood-splat"
-        id="bloodSplat"
-    ></div>
+        class="blood"
+        id="blood"
+    >
+
+        <div
+            class="blood-liquid-back"
+        ></div>
 
 
-    <!-- =================================
-         BLOOD SPLASH ARMS
-    ================================= -->
-
-    <div class="splat-arm one"></div>
-    <div class="splat-arm two"></div>
-    <div class="splat-arm three"></div>
-    <div class="splat-arm four"></div>
+        <div
+            class="blood-liquid"
+        ></div>
 
 
-    <!-- =================================
-         THICK DRIPS
-    ================================= -->
+        <div
+            class="drips">
 
-    <div class="drip one"></div>
-    <div class="drip two"></div>
-    <div class="drip three"></div>
-    <div class="drip four"></div>
-    <div class="drip five"></div>
+            <div class="drip"></div>
+
+            <div class="drip"></div>
+
+            <div class="drip"></div>
+
+            <div class="drip"></div>
+
+            <div class="drip"></div>
+
+            <div class="drip"></div>
+
+        </div>
+
+    </div>
 
 
-    <!-- =================================
+
+    <!-- ==========================================
          BUTTON
-    ================================= -->
+    ========================================== -->
 
     <div class="bank-container">
 
@@ -750,17 +862,19 @@
         </button>
 
 
-        <!-- =================================
+        <!-- ======================================
              MESSAGE
-        ================================= -->
+        ====================================== -->
 
         <div
             class="thanks-message"
             id="thanksMessage"
         >
 
-            <div class="blood-writing">
+            <div class="thanks-text">
+
                 Thanks for supporting live music :)
+
             </div>
 
         </div>
@@ -768,12 +882,13 @@
     </div>
 
 
+
     <script>
 
 
-        /* =================================
+        /* ==========================================
            COPY BANK DETAILS
-        ================================= */
+        ========================================== */
 
         async function copyCombinedDetails() {
 
@@ -796,13 +911,13 @@
                 );
 
 
-            const bloodSplat =
+            const blood =
                 document.getElementById(
-                    "bloodSplat"
+                    "blood"
                 );
 
 
-            const thanksMessage =
+            const message =
                 document.getElementById(
                     "thanksMessage"
                 );
@@ -811,62 +926,63 @@
             try {
 
 
-                /* =========================
+                /* ==================================
                    COPY
-                ========================= */
+                ================================== */
 
                 await navigator.clipboard.writeText(
                     dynamicText
                 );
 
 
-                /* =========================
-                   BUTTON DOES NOT MOVE
-                ========================= */
+                /* ==================================
+                   BUTTON STAYS WHERE IT IS
+                ================================== */
 
                 button.innerText =
                     "Copied!";
 
 
-                /* =========================
-                   BIG BLOOD SPLAT
-                ========================= */
+                /* ==================================
+                   BIG BLOOD SPLASH
+                ================================== */
 
-                bloodSplat.classList.add(
-                    "explode"
+                blood.classList.add(
+                    "active"
                 );
 
 
-                /* =========================
-                   WAIT FOR BIG SPLAT
-                ========================= */
+                /* ==================================
+                   WAIT FOR BLOOD
+                ================================== */
 
                 setTimeout(function() {
 
+
                     /*
-                        Start the blood
-                        disappearing.
+                        Start draining/fading
                     */
 
-                    bloodSplat.classList.add(
-                        "fade"
+                    blood.classList.add(
+                        "draining"
                     );
 
 
                     /*
-                        Reveal message.
+                        Reveal bloody text
                     */
 
-                    thanksMessage.classList.add(
-                        "revealed"
+                    message.classList.add(
+                        "show"
                     );
+
 
                 }, 3000);
 
 
-                /* =========================
+                /* ==================================
                    RESET BUTTON
-                ========================= */
+                ================================== */
 
                 setTimeout(function() {
 
@@ -879,6 +995,7 @@
 
 
             catch (err) {
+
 
                 console.error(
                     "Could not copy details:",
