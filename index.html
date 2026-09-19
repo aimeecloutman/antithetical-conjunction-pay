@@ -1,52 +1,26 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Antithetical Conjunction - Payment Details</title>
 
-
-    <!-- ==========================================
-         NOSIFER FONT
-    ========================================== -->
-
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap"
-        rel="stylesheet"
-    >
-
-
     <style>
 
-        /* ==========================================
-           PAGE
-        ========================================== */
+        /* ================================
+           PAGE / BACKGROUND
+        ================================= */
 
         html,
         body {
-
             margin: 0;
             padding: 0;
-
             width: 100%;
             height: 100%;
         }
 
-
         body {
-
             font-family:
                 -apple-system,
                 BlinkMacSystemFont,
@@ -54,75 +28,62 @@
                 Roboto,
                 sans-serif;
 
-            background-image:
-                url("image-1024.jpg");
+            /* Your artwork */
+            background-image: url("image-1024.jpg");
 
             background-size: cover;
-
             background-position: center;
-
             background-repeat: no-repeat;
 
             min-height: 100vh;
-
-            overflow: hidden;
 
             position: relative;
         }
 
 
-
-        /* ==========================================
-           BLOOD COLOUR
-        ========================================== */
-
-        :root {
-
-            --blood:
-                #850000;
-        }
-
-
-
-        /* ==========================================
-           BUTTON CONTAINER
-        ========================================== */
+        /* ================================
+           BUTTON POSITION
+        ================================= */
 
         .bank-container {
 
             position: absolute;
 
+            /* Move button up/down here */
             top: 40%;
+
+            /* Centre horizontally */
             left: 50%;
 
-            transform:
-                translate(-50%, -50%);
+            transform: translate(-50%, -50%);
 
+            /* Button width */
             width: 240px;
-
-            z-index: 100;
         }
 
 
-
-        /* ==========================================
-           BUTTON
-        ========================================== */
+        /* ================================
+           COPY BUTTON
+        ================================= */
 
         .share-btn {
 
             width: 100%;
 
-            padding: 24px;
+            /* Button height */
+            padding: 24px 24px;
 
+            /* White background */
             background: #ffffff;
 
+            /* Black text */
             color: #000000;
 
             border: none;
 
             border-radius: 8px;
 
+            /* Text size */
             font-size: 19px;
 
             font-weight: 700;
@@ -132,18 +93,17 @@
             cursor: pointer;
 
             box-shadow:
-                0 5px 18px
-                rgba(0, 0, 0, 0.5);
-
-            position: relative;
-
-            z-index: 100;
+                0 5px 18px rgba(0, 0, 0, 0.5);
 
             transition:
                 background 0.2s ease,
-                color 0.2s ease;
+                transform 0.1s ease;
         }
 
+
+        /* ================================
+           HOVER
+        ================================= */
 
         .share-btn:hover {
 
@@ -151,641 +111,112 @@
         }
 
 
+        /* ================================
+           WHEN PRESSED
+        ================================= */
+
         .share-btn:active {
 
-            transform:
-                scale(0.97);
+            transform: scale(0.97);
         }
 
+
+        /* ================================
+           AFTER COPYING
+        ================================= */
 
         .share-btn.copied {
 
-            color:
-                var(--blood);
+            background: #ffffff;
+
+            color: #000000;
         }
 
 
+        /* ================================
+           PHONE / SMALL SCREEN
+        ================================= */
 
-        /* ==========================================
-           BLOOD CONTAINER
-           
-           IMPORTANT:
-           
-           Blood is ABOVE the button.
-           
-           This means the splat physically covers
-           the button during the explosion.
-        ========================================== */
+        @media (max-width: 600px) {
 
-        .blood {
+            .bank-container {
 
-            position: fixed;
+                width: 225=px;
 
-            inset: 0;
+                top: 30%;
+            }
 
-            width: 100vw;
-            height: 100vh;
+            .share-btn {
 
-            pointer-events: none;
+                padding: 20px 20px;
 
-            /*
-                Higher than the button.
-            */
-
-            z-index: 300;
-
-            opacity: 0;
-
-            transition:
-                opacity
-                0.1s ease;
+                font-size: 17px;
+            }
         }
-
-
-        .blood.active {
-
-            opacity: 1;
-        }
-
-
-
-        /* ==========================================
-           GIANT SPLAT
-        ========================================== */
-
-        .blood-splat {
-
-            position: absolute;
-
-            left: 50%;
-            top: 40%;
-
-            /*
-                Huge desktop size.
-            */
-
-            width: 1600px;
-
-            height: 1200px;
-
-            transform:
-                translate(-50%, -50%)
-                scale(0);
-
-            transform-origin:
-                center;
-
-            opacity: 0;
-
-            filter:
-                drop-shadow(
-                    0 10px 15px
-                    rgba(0, 0, 0, 0.25)
-                );
-
-            transition:
-
-                transform
-                0.8s
-                cubic-bezier(.08, 1.35, .18, 1),
-
-                opacity
-                0.1s ease;
-        }
-
-
-        .blood.active .blood-splat {
-
-            transform:
-                translate(-50%, -50%)
-                scale(1);
-
-            opacity: 1;
-        }
-
-
-        .blood-shape {
-
-            fill:
-                var(--blood);
-        }
-
-
-
-        /* ==========================================
-           OUTER SPLASH DOTS
-        ========================================== */
-
-        .blood-dot {
-
-            position: absolute;
-
-            background:
-                var(--blood);
-
-            border-radius: 50%;
-
-            opacity: 0;
-
-            transform:
-                scale(0);
-
-            transition:
-
-                transform
-                0.55s
-                cubic-bezier(.1, 1.3, .2, 1),
-
-                opacity
-                0.12s ease;
-        }
-
-
-        .blood.active .blood-dot {
-
-            opacity: 1;
-
-            transform:
-                scale(1);
-        }
-
-
-        .dot-1 {
-
-            left: 2%;
-            top: 12%;
-
-            width: 48px;
-            height: 48px;
-
-            transition-delay:
-                0.04s;
-        }
-
-
-        .dot-2 {
-
-            left: 10%;
-            top: 4%;
-
-            width: 25px;
-            height: 25px;
-
-            transition-delay:
-                0.08s;
-        }
-
-
-        .dot-3 {
-
-            left: 1%;
-            top: 67%;
-
-            width: 38px;
-            height: 38px;
-
-            transition-delay:
-                0.12s;
-        }
-
-
-        .dot-4 {
-
-            left: 14%;
-            bottom: 4%;
-
-            width: 45px;
-            height: 45px;
-
-            transition-delay:
-                0.10s;
-        }
-
-
-        .dot-5 {
-
-            right: 2%;
-            top: 10%;
-
-            width: 52px;
-            height: 52px;
-
-            transition-delay:
-                0.07s;
-        }
-
-
-        .dot-6 {
-
-            right: 11%;
-            top: 3%;
-
-            width: 27px;
-            height: 27px;
-
-            transition-delay:
-                0.14s;
-        }
-
-
-        .dot-7 {
-
-            right: 1%;
-            top: 66%;
-
-            width: 40px;
-            height: 40px;
-
-            transition-delay:
-                0.16s;
-        }
-
-
-        .dot-8 {
-
-            right: 13%;
-            bottom: 4%;
-
-            width: 47px;
-            height: 47px;
-
-            transition-delay:
-                0.11s;
-        }
-
-
-        .dot-9 {
-
-            left: 27%;
-            top: 1%;
-
-            width: 16px;
-            height: 16px;
-
-            transition-delay:
-                0.18s;
-        }
-
-
-        .dot-10 {
-
-            right: 27%;
-            top: 2%;
-
-            width: 19px;
-            height: 19px;
-
-            transition-delay:
-                0.21s;
-        }
-
-
-
-        /* ==========================================
-           BLOOD FADE
-           
-           The splat stays enormous while it fades.
-           It does NOT shrink back into the centre.
-        ========================================== */
-
-        .blood.draining {
-
-            opacity: 0;
-
-            transition:
-                opacity
-                1.5s
-                ease;
-        }
-
-
-        .blood.draining
-        .blood-splat {
-
-            transform:
-                translate(-50%, -50%)
-                scale(1);
-
-            opacity: 0;
-
-            transition:
-
-                opacity
-                1.5s
-                ease;
-        }
-
-
-        .blood.draining
-        .blood-dot {
-
-            transform:
-                scale(1);
-
-            opacity: 0;
-
-            transition:
-
-                opacity
-                1s
-                ease;
-        }
-
-        .thanks-message {
-
-            position: absolute;
-
-            top:
-                calc(100% + 32px);
-
-            left: 50%;
-
-            transform:
-                translateX(-50%)
-                translateY(15px);
-
-            width: 370px;
-
-            text-align: center;
-
-            opacity: 0;
-
-            z-index: 80;
-
-            pointer-events: none;
-
-            transition:
-
-                opacity
-                0.8s ease,
-
-                transform
-                0.8s ease;
-        }
-
-
-        .thanks-message.show {
-
-            opacity: 1;
-
-            transform:
-                translateX(-50%)
-                translateY(0);
-        }
-
-
-
-        /* ==========================================
-           NOSIFER TEXT
-        ========================================== */
-
-        .thanks-text {
-
-            position: relative;
-
-            display: inline-block;
-
-            color:
-                var(--blood);
-
-            font-family:
-                "Nosifer",
-                cursive;
-
-            font-size:
-                25px;
-
-            line-height:
-                1.4;
-
-            letter-spacing:
-                0.5px;
-
-            text-shadow:
-
-                1px 2px 0
-                rgba(40, 0, 0, 0.8),
-
-                0 3px 6px
-                rgba(0, 0, 0, 0.4);
-        }
-
-
-
-        /* ==========================================
-           MOBILE
-        ========================================== */
-
-@media (max-width: 600px) {
-    .bank-container {
-        width: 225px;
-        top: 30%;
-    }
-    .share-btn {
-        padding: 20px;
-        font-size: 17px;
-    }
-    .blood-splat {
-        width: 1900px;
-        height: 1550px;
-        left: 50%;
-        top: 50%;
-    }
-    .thanks-message {
-        width: 290px;
-    }
-
-    .thanks-text {
-        font-size: 20px;
-        line-height: 1.5;
-    }
-}
 
     </style>
 </head>
+
+
 <body>
 
 
-    <!-- ==========================================
-         BLOOD SPLAT
-    ========================================== -->
-
-    <div
-        class="blood"
-        id="blood"
-    >
-
-
-        <svg
-            class="blood-splat"
-            viewBox="0 0 1000 760"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-
-            <!--
-                GIANT CARTOON BLOOD SPLAT
-
-                Thin arms start at the centre and
-                gradually balloon outward into large
-                rounded ends.
-            -->
-
-            <path
-                class="blood-shape"
-                d="
-                M 500 255
-
-                C 485 240 470 222 455 202
-                C 438 180 424 154 408 135
-                C 394 118 374 116 363 128
-                C 351 141 359 160 374 177
-                C 393 199 414 220 438 242
-
-                C 414 232 388 219 360 205
-                C 334 192 306 181 284 188
-                C 264 194 260 211 273 225
-                C 287 240 312 244 337 247
-                C 371 252 403 254 432 260
-
-                C 397 263 358 260 323 258
-                C 291 256 256 254 229 266
-                C 207 276 203 297 218 311
-                C 235 327 265 328 294 324
-                C 337 318 377 305 419 295
-
-                C 389 313 361 332 336 353
-                C 308 377 284 402 287 424
-                C 290 445 311 451 328 438
-                C 350 421 365 394 381 372
-                C 399 348 417 326 439 310
-
-                C 425 344 413 376 405 409
-                C 397 442 394 477 411 493
-                C 426 507 447 498 454 477
-                C 464 448 460 414 463 382
-                C 465 352 470 326 478 306
-
-                C 476 344 475 382 480 416
-                C 485 449 492 482 511 493
-                C 530 504 548 490 550 468
-                C 553 438 542 408 536 379
-                C 530 350 526 324 527 304
-
-                C 542 334 558 362 576 389
-                C 593 415 610 440 632 445
-                C 651 449 664 434 660 416
-                C 655 392 631 371 613 350
-                C 592 327 576 306 563 286
-
-                C 591 300 622 316 655 327
-                C 686 338 718 349 741 341
-                C 761 334 767 315 754 301
-                C 741 286 712 285 685 287
-                C 647 289 616 286 584 278
-
-                C 616 265 649 250 679 232
-                C 706 216 730 197 728 177
-                C 726 157 707 149 689 159
-                C 665 172 648 194 629 213
-                C 610 232 591 247 570 259
-
-                C 586 234 601 208 615 181
-                C 628 156 637 127 624 111
-                C 611 95 590 103 580 121
-                C 566 146 561 175 550 201
-                C 540 224 529 241 516 256
-
-                C 511 247 505 245 500 255
-
-                Z
-                "
-            />
-
-        </svg>
-
-
-
-        <!-- ==========================================
-             OUTER SPLASH DOTS
-        ========================================== -->
-
-        <div class="blood-dot dot-1"></div>
-        <div class="blood-dot dot-2"></div>
-        <div class="blood-dot dot-3"></div>
-        <div class="blood-dot dot-4"></div>
-        <div class="blood-dot dot-5"></div>
-        <div class="blood-dot dot-6"></div>
-        <div class="blood-dot dot-7"></div>
-        <div class="blood-dot dot-8"></div>
-        <div class="blood-dot dot-9"></div>
-        <div class="blood-dot dot-10"></div>
-
-
-    </div>
-
-
-
-    <!-- ==========================================
-         BUTTON
-    ========================================== -->
+    <!-- =================================
+         COPY BANK DETAILS BUTTON
+    ================================= -->
 
     <div class="bank-container">
-
 
         <button
             class="share-btn"
             id="copyDetailsBtn"
             onclick="copyCombinedDetails()"
         >
-
             Copy Bank Details
-
         </button>
-
-
-        <!-- ======================================
-             THANK YOU
-        ====================================== -->
-
-        <div
-            class="thanks-message"
-            id="thanksMessage"
-        >
-
-            <div class="thanks-text">
-
-                Thanks for supporting live music :)
-
-            </div>
-
-        </div>
-
 
     </div>
 
 
+    <!-- =================================
+         JAVASCRIPT
+    ================================= -->
 
     <script>
 
-
-        /* ==========================================
-           COPY BANK DETAILS
-        ========================================== */
-
         async function copyCombinedDetails() {
 
+            /*
+                ==============================
+                YOUR BANK DETAILS
+                ==============================
+            */
 
             const name =
                 "TAI VAN DER BAR";
-
 
             const number =
                 "38-9005-0490046-02";
 
 
+            /*
+                ==============================
+                TEXT THAT GETS COPIED
+                ==============================
+
+                It will copy:
+
+                T VAN DER BAR
+                38-9005-0490046-02
+            */
+
             const dynamicText =
                 `${name}\n${number}`;
 
+
+            /*
+                Find the button
+            */
 
             const button =
                 document.getElementById(
@@ -793,33 +224,21 @@
                 );
 
 
-            const blood =
-                document.getElementById(
-                    "blood"
-                );
-
-
-            const message =
-                document.getElementById(
-                    "thanksMessage"
-                );
-
-
             try {
 
-
-                /* ==================================
-                   COPY
-                ================================== */
+                /*
+                    Copy the bank details
+                    to the phone clipboard.
+                */
 
                 await navigator.clipboard.writeText(
                     dynamicText
                 );
 
 
-                /* ==================================
-                   BUTTON CHANGES IMMEDIATELY
-                ================================== */
+                /*
+                    Show confirmation
+                */
 
                 button.innerText =
                     "Copied!";
@@ -829,74 +248,10 @@
                 );
 
 
-                /* ==================================
-                   RESET BLOOD
-                ================================== */
-
-                blood.classList.remove(
-                    "draining"
-                );
-
-                blood.classList.remove(
-                    "active"
-                );
-
-
-                message.classList.remove(
-                    "show"
-                );
-
-
                 /*
-                    Force the browser to recognise
-                    the reset before replaying.
+                    Return to normal after
+                    2.5 seconds.
                 */
-
-                void blood.offsetWidth;
-
-
-                /* ==================================
-                   EXPLODE
-                ================================== */
-
-                blood.classList.add(
-                    "active"
-                );
-
-
-                /* ==================================
-                   HOLD FULL SCREEN
-                ================================== */
-
-                setTimeout(function() {
-
-                    blood.classList.add(
-                        "draining"
-                    );
-
-                }, 2800);
-
-
-                /* ==================================
-                   REVEAL TEXT
-                   
-                   Blood starts fading at 2.8s.
-                   It takes 1.5s to disappear.
-                   Text appears just after.
-                ================================== */
-
-                setTimeout(function() {
-
-                    message.classList.add(
-                        "show"
-                    );
-
-                }, 4100);
-
-
-                /* ==================================
-                   RESET BUTTON
-                ================================== */
 
                 setTimeout(function() {
 
@@ -907,13 +262,14 @@
                         "copied"
                     );
 
-                }, 5500);
-
-            }
+                }, 2500);
 
 
-            catch (err) {
+            } catch (err) {
 
+                /*
+                    If copying doesn't work
+                */
 
                 console.error(
                     "Could not copy details:",
@@ -938,7 +294,5 @@
 
     </script>
 
-
 </body>
-
 </html>
