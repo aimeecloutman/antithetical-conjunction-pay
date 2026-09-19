@@ -11,7 +11,10 @@
     <title>Antithetical Conjunction - Payment Details</title>
 
 
-    <!-- Horror / blood-style font -->
+    <!-- ==========================================
+         NOSIFER FONT
+    ========================================== -->
+
     <link rel="preconnect"
         href="https://fonts.googleapis.com">
 
@@ -82,7 +85,7 @@
 
 
         /* ==========================================
-           BUTTON
+           BUTTON CONTAINER
         ========================================== */
 
         .bank-container {
@@ -100,6 +103,11 @@
             z-index: 100;
         }
 
+
+
+        /* ==========================================
+           BUTTON
+        ========================================== */
 
         .share-btn {
 
@@ -129,7 +137,11 @@
 
             position: relative;
 
-            z-index: 200;
+            z-index: 100;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
         }
 
 
@@ -146,9 +158,23 @@
         }
 
 
+        .share-btn.copied {
+
+            color:
+                var(--blood);
+        }
+
+
 
         /* ==========================================
            BLOOD CONTAINER
+           
+           IMPORTANT:
+           
+           Blood is ABOVE the button.
+           
+           This means the splat physically covers
+           the button during the explosion.
         ========================================== */
 
         .blood {
@@ -162,9 +188,17 @@
 
             pointer-events: none;
 
-            z-index: 50;
+            /*
+                Higher than the button.
+            */
+
+            z-index: 300;
 
             opacity: 0;
+
+            transition:
+                opacity
+                0.1s ease;
         }
 
 
@@ -176,11 +210,7 @@
 
 
         /* ==========================================
-           GIANT CARTOON SPLAT
-           
-           Thin arms start from the central mass,
-           then dramatically balloon into rounded
-           ends which reach toward the edges.
+           GIANT SPLAT
         ========================================== */
 
         .blood-splat {
@@ -191,13 +221,12 @@
             top: 40%;
 
             /*
-                Much larger than before so the splat
-                can spread over almost the entire page.
+                Huge desktop size.
             */
 
-            width: min(1450px, 165vw);
+            width: 1600px;
 
-            height: min(1050px, 125vh);
+            height: 1200px;
 
             transform:
                 translate(-50%, -50%)
@@ -217,11 +246,11 @@
             transition:
 
                 transform
-                0.85s
-                cubic-bezier(.08, 1.25, .2, 1),
+                0.8s
+                cubic-bezier(.08, 1.35, .18, 1),
 
                 opacity
-                0.15s ease;
+                0.1s ease;
         }
 
 
@@ -245,10 +274,6 @@
 
         /* ==========================================
            OUTER SPLASH DOTS
-           
-           Bigger and more widely distributed so
-           the whole screen participates in the
-           effect.
         ========================================== */
 
         .blood-dot {
@@ -287,60 +312,47 @@
 
         .dot-1 {
 
-            left: 4%;
-            top: 16%;
+            left: 2%;
+            top: 12%;
 
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
 
             transition-delay:
-                0.05s;
+                0.04s;
         }
 
 
         .dot-2 {
 
-            left: 13%;
-            top: 7%;
+            left: 10%;
+            top: 4%;
 
-            width: 22px;
-            height: 22px;
-
-            transition-delay:
-                0.12s;
-        }
-
-
-        .dot-3 {
-
-            left: 3%;
-            top: 62%;
-
-            width: 30px;
-            height: 30px;
-
-            transition-delay:
-                0.18s;
-        }
-
-
-        .dot-4 {
-
-            left: 18%;
-            bottom: 7%;
-
-            width: 38px;
-            height: 38px;
+            width: 25px;
+            height: 25px;
 
             transition-delay:
                 0.08s;
         }
 
 
-        .dot-5 {
+        .dot-3 {
 
-            right: 4%;
-            top: 13%;
+            left: 1%;
+            top: 67%;
+
+            width: 38px;
+            height: 38px;
+
+            transition-delay:
+                0.12s;
+        }
+
+
+        .dot-4 {
+
+            left: 14%;
+            bottom: 4%;
 
             width: 45px;
             height: 45px;
@@ -350,79 +362,90 @@
         }
 
 
-        .dot-6 {
-
-            right: 14%;
-            top: 5%;
-
-            width: 21px;
-            height: 21px;
-
-            transition-delay:
-                0.16s;
-        }
-
-
-        .dot-7 {
+        .dot-5 {
 
             right: 2%;
-            top: 58%;
+            top: 10%;
 
-            width: 34px;
-            height: 34px;
+            width: 52px;
+            height: 52px;
 
             transition-delay:
-                0.2s;
+                0.07s;
         }
 
 
-        .dot-8 {
+        .dot-6 {
 
-            right: 17%;
-            bottom: 6%;
+            right: 11%;
+            top: 3%;
 
-            width: 42px;
-            height: 42px;
+            width: 27px;
+            height: 27px;
 
             transition-delay:
                 0.14s;
         }
 
 
-        .dot-9 {
+        .dot-7 {
 
-            left: 28%;
-            top: 3%;
+            right: 1%;
+            top: 66%;
 
-            width: 14px;
-            height: 14px;
+            width: 40px;
+            height: 40px;
 
             transition-delay:
-                0.20s;
+                0.16s;
+        }
+
+
+        .dot-8 {
+
+            right: 13%;
+            bottom: 4%;
+
+            width: 47px;
+            height: 47px;
+
+            transition-delay:
+                0.11s;
+        }
+
+
+        .dot-9 {
+
+            left: 27%;
+            top: 1%;
+
+            width: 16px;
+            height: 16px;
+
+            transition-delay:
+                0.18s;
         }
 
 
         .dot-10 {
 
-            right: 28%;
-            top: 4%;
+            right: 27%;
+            top: 2%;
 
-            width: 17px;
-            height: 17px;
+            width: 19px;
+            height: 19px;
 
             transition-delay:
-                0.23s;
+                0.21s;
         }
 
 
 
         /* ==========================================
-           DRAINING / FADING
+           BLOOD FADE
            
-           The splat does NOT visibly shrink away.
-           It simply fades out, giving the impression
-           that the blood is disappearing from the
-           page.
+           The splat stays enormous while it fades.
+           It does NOT shrink back into the centre.
         ========================================== */
 
         .blood.draining {
@@ -431,7 +454,7 @@
 
             transition:
                 opacity
-                1.45s
+                1.5s
                 ease;
         }
 
@@ -448,7 +471,7 @@
             transition:
 
                 opacity
-                1.45s
+                1.5s
                 ease;
         }
 
@@ -485,7 +508,7 @@
 
             transform:
                 translateX(-50%)
-                translateY(10px);
+                translateY(15px);
 
             width: 370px;
 
@@ -500,10 +523,10 @@
             transition:
 
                 opacity
-                1s ease,
+                0.8s ease,
 
                 transform
-                1s ease;
+                0.8s ease;
         }
 
 
@@ -519,7 +542,7 @@
 
 
         /* ==========================================
-           NOSIFER THANK-YOU TEXT
+           NOSIFER TEXT
         ========================================== */
 
         .thanks-text {
@@ -556,13 +579,12 @@
 
 
         /* ==========================================
-           NO STATIC DRIPS
-        ========================================== */
-
-
-
-        /* ==========================================
            MOBILE
+           
+           EVEN BIGGER SPLAT.
+           
+           The splat is intentionally several times
+           larger than the viewport.
         ========================================== */
 
         @media (max-width: 600px) {
@@ -585,9 +607,20 @@
 
             .blood-splat {
 
-                width: 1150px;
+                /*
+                    Massive mobile splat.
 
-                height: 900px;
+                    This guarantees the blood extends
+                    beyond all four edges of the phone.
+                */
+
+                width: 1900px;
+
+                height: 1550px;
+
+                left: 50%;
+
+                top: 38%;
             }
 
 
@@ -600,6 +633,8 @@
             .thanks-text {
 
                 font-size: 20px;
+
+                line-height: 1.5;
             }
 
         }
@@ -631,12 +666,9 @@
             <!--
                 GIANT CARTOON BLOOD SPLAT
 
-                Each arm is intentionally narrow near
-                the centre before swelling outward into
-                a rounded bulb.
-
-                This creates a more "ballooned" splat
-                rather than sharp triangular spikes.
+                Thin arms start at the centre and
+                gradually balloon outward into large
+                rounded ends.
             -->
 
             <path
@@ -719,23 +751,14 @@
         ========================================== -->
 
         <div class="blood-dot dot-1"></div>
-
         <div class="blood-dot dot-2"></div>
-
         <div class="blood-dot dot-3"></div>
-
         <div class="blood-dot dot-4"></div>
-
         <div class="blood-dot dot-5"></div>
-
         <div class="blood-dot dot-6"></div>
-
         <div class="blood-dot dot-7"></div>
-
         <div class="blood-dot dot-8"></div>
-
         <div class="blood-dot dot-9"></div>
-
         <div class="blood-dot dot-10"></div>
 
 
@@ -761,7 +784,9 @@
         </button>
 
 
-        <!-- THANK YOU -->
+        <!-- ======================================
+             THANK YOU
+        ====================================== -->
 
         <div
             class="thanks-message"
@@ -824,26 +849,30 @@
             try {
 
 
-                /* ==============================
+                /* ==================================
                    COPY
-                ============================== */
+                ================================== */
 
                 await navigator.clipboard.writeText(
                     dynamicText
                 );
 
 
-                /* ==============================
-                   BUTTON
-                ============================== */
+                /* ==================================
+                   BUTTON CHANGES IMMEDIATELY
+                ================================== */
 
                 button.innerText =
                     "Copied!";
 
+                button.classList.add(
+                    "copied"
+                );
 
-                /* ==============================
-                   RESET ANY PREVIOUS ANIMATION
-                ============================== */
+
+                /* ==================================
+                   RESET BLOOD
+                ================================== */
 
                 blood.classList.remove(
                     "draining"
@@ -854,27 +883,31 @@
                 );
 
 
+                message.classList.remove(
+                    "show"
+                );
+
+
                 /*
                     Force the browser to recognise
-                    the reset before starting the
-                    animation again.
+                    the reset before replaying.
                 */
 
                 void blood.offsetWidth;
 
 
-                /* ==============================
-                   BLOOD SPLAT
-                ============================== */
+                /* ==================================
+                   EXPLODE
+                ================================== */
 
                 blood.classList.add(
                     "active"
                 );
 
 
-                /* ==============================
-                   BLOOD STAYS FOR 3 SECONDS
-                ============================== */
+                /* ==================================
+                   HOLD FULL SCREEN
+                ================================== */
 
                 setTimeout(function() {
 
@@ -882,12 +915,16 @@
                         "draining"
                     );
 
-                }, 3000);
+                }, 2800);
 
 
-                /* ==============================
-                   THANK YOU
-                ================================= */
+                /* ==================================
+                   REVEAL TEXT
+                   
+                   Blood starts fading at 2.8s.
+                   It takes 1.5s to disappear.
+                   Text appears just after.
+                ================================== */
 
                 setTimeout(function() {
 
@@ -895,19 +932,23 @@
                         "show"
                     );
 
-                }, 4400);
+                }, 4100);
 
 
-                /* ==============================
+                /* ==================================
                    RESET BUTTON
-                ================================= */
+                ================================== */
 
                 setTimeout(function() {
 
                     button.innerText =
                         "Copy Bank Details";
 
-                }, 5000);
+                    button.classList.remove(
+                        "copied"
+                    );
+
+                }, 5500);
 
             }
 
