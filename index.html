@@ -491,12 +491,6 @@
                 ease;
         }
 
-
-
-        /* ==========================================
-           THANK YOU MESSAGE
-        ========================================== */
-
         .thanks-message {
 
             position: absolute;
@@ -580,70 +574,35 @@
 
         /* ==========================================
            MOBILE
-           
-           EVEN BIGGER SPLAT.
-           
-           The splat is intentionally several times
-           larger than the viewport.
         ========================================== */
 
-        @media (max-width: 600px) {
+@media (max-width: 600px) {
+    .bank-container {
+        width: 225px;
+        top: 30%;
+    }
+    .share-btn {
+        padding: 20px;
+        font-size: 17px;
+    }
+    .blood-splat {
+        width: 1900px;
+        height: 1550px;
+        left: 50%;
+        top: 50%;
+    }
+    .thanks-message {
+        width: 290px;
+    }
 
-            .bank-container {
-
-                width: 225px;
-
-                top: 30%;
-            }
-
-
-            .share-btn {
-
-                padding: 20px;
-
-                font-size: 17px;
-            }
-
-
-            .blood-splat {
-
-                /*
-                    Massive mobile splat.
-
-                    This guarantees the blood extends
-                    beyond all four edges of the phone.
-                */
-
-                width: 1900px;
-
-                height: 1550px;
-
-                left: 50%;
-
-                top: 38%;
-            }
-
-
-            .thanks-message {
-
-                width: 290px;
-            }
-
-
-            .thanks-text {
-
-                font-size: 20px;
-
-                line-height: 1.5;
-            }
-
-        }
+    .thanks-text {
+        font-size: 20px;
+        line-height: 1.5;
+    }
+}
 
     </style>
-
 </head>
-
-
 <body>
 
 
