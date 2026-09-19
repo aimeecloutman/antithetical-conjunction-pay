@@ -4,295 +4,424 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Antithetical Conjunction - Payment Details</title>
+<title>Antithetical Conjunction - Payment Details</title>
 
-    <style>
+<style>
 
-        /* ================================
-           PAGE / BACKGROUND
-        ================================= */
+    /* ================================
+       PAGE / BACKGROUND
+    ================================= */
 
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-        }
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-        body {
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                sans-serif;
+    body {
+        font-family:
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            sans-serif;
 
-            /* Your artwork */
-            background-image: url("image-1024.jpg");
+        background-image: url("image-1024.jpg");
 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
 
-            min-height: 100vh;
+        min-height: 100vh;
 
-            position: relative;
-        }
+        position: relative;
+        overflow: hidden;
+    }
 
 
-        /* ================================
-           BUTTON POSITION
-        ================================= */
+    /* ================================
+       BUTTON POSITION
+    ================================= */
+
+    .bank-container {
+
+        position: absolute;
+
+        top: 40%;
+
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+
+        width: 240px;
+
+        z-index: 2;
+    }
+
+
+    /* ================================
+       COPY BUTTON
+    ================================= */
+
+    .share-btn {
+
+        width: 100%;
+
+        padding: 24px 24px;
+
+        background: #ffffff;
+
+        color: #000000;
+
+        border: none;
+
+        border-radius: 8px;
+
+        font-size: 19px;
+
+        font-weight: 700;
+
+        letter-spacing: 0.2px;
+
+        cursor: pointer;
+
+        box-shadow:
+            0 5px 18px rgba(0, 0, 0, 0.5);
+
+        transition:
+            background 0.2s ease,
+            transform 0.1s ease;
+    }
+
+
+    .share-btn:hover {
+
+        background: #eeeeee;
+    }
+
+
+    .share-btn:active {
+
+        transform: scale(0.97);
+    }
+
+
+    .share-btn.copied {
+
+        background: #ffffff;
+
+        color: #000000;
+    }
+
+
+    /* ================================
+       THANK YOU MESSAGE
+    ================================= */
+
+    .thank-you {
+
+        position: absolute;
+
+        top: 52%;
+
+        left: 50%;
+
+        transform: translate(-50%, -50%) scale(0.7);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 18px;
+
+        width: min(90%, 600px);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        pointer-events: none;
+
+        z-index: 3;
+
+        transition:
+            opacity 0.5s ease,
+            transform 0.5s ease;
+    }
+
+
+    /* Monster image */
+
+    .thank-you img {
+
+        width: 150px;
+
+        height: auto;
+
+        flex-shrink: 0;
+
+        filter:
+            drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45));
+    }
+
+
+    /* Message */
+
+    .thank-you-message {
+
+        color: white;
+
+        font-family:
+            "Comic Sans MS",
+            "Comic Sans",
+            cursive;
+
+        font-size: clamp(24px, 4vw, 42px);
+
+        font-weight: 700;
+
+        line-height: 1.05;
+
+        text-align: left;
+
+        text-shadow:
+            3px 3px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000;
+    }
+
+
+    /* ================================
+       SHOW THANK YOU
+    ================================= */
+
+    .thank-you.show {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+
+    /* ================================
+       PHONE / SMALL SCREEN
+    ================================= */
+
+    @media (max-width: 600px) {
 
         .bank-container {
 
-            position: absolute;
+            width: 225px;
 
-            /* Move button up/down here */
-            top: 40%;
-
-            /* Centre horizontally */
-            left: 50%;
-
-            transform: translate(-50%, -50%);
-
-            /* Button width */
-            width: 240px;
+            top: 30%;
         }
 
-
-        /* ================================
-           COPY BUTTON
-        ================================= */
 
         .share-btn {
 
-            width: 100%;
+            padding: 20px 20px;
 
-            /* Button height */
-            padding: 24px 24px;
-
-            /* White background */
-            background: #ffffff;
-
-            /* Black text */
-            color: #000000;
-
-            border: none;
-
-            border-radius: 8px;
-
-            /* Text size */
-            font-size: 19px;
-
-            font-weight: 700;
-
-            letter-spacing: 0.2px;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 5px 18px rgba(0, 0, 0, 0.5);
-
-            transition:
-                background 0.2s ease,
-                transform 0.1s ease;
+            font-size: 17px;
         }
 
 
-        /* ================================
-           HOVER
-        ================================= */
+        .thank-you {
 
-        .share-btn:hover {
+            top: 55%;
 
-            background: #eeeeee;
+            gap: 10px;
+
+            width: 94%;
         }
 
 
-        /* ================================
-           WHEN PRESSED
-        ================================= */
+        .thank-you img {
 
-        .share-btn:active {
-
-            transform: scale(0.97);
+            width: 105px;
         }
 
 
-        /* ================================
-           AFTER COPYING
-        ================================= */
+        .thank-you-message {
 
-        .share-btn.copied {
+            font-size: 25px;
 
-            background: #ffffff;
-
-            color: #000000;
+            text-align: left;
         }
+    }
+
+</style>
+
+</head> <body>
+<!-- =================================
+     COPY BANK DETAILS BUTTON
+================================= -->
+
+<div class="bank-container">
+
+    <button
+        class="share-btn"
+        id="copyDetailsBtn"
+        onclick="copyCombinedDetails()"
+    >
+        Copy Bank Details
+    </button>
+
+</div>
 
 
-        /* ================================
-           PHONE / SMALL SCREEN
-        ================================= */
+<!-- =================================
+     THANK YOU MESSAGE + MONSTER
+================================= -->
 
-        @media (max-width: 600px) {
+<div class="thank-you" id="thankYou">
 
-            .bank-container {
+    <img
+        src="monsta-1.png"
+        alt="Silly monster"
+    >
 
-                width: 225=px;
-
-                top: 30%;
-            }
-
-            .share-btn {
-
-                padding: 20px 20px;
-
-                font-size: 17px;
-            }
-        }
-
-    </style>
-</head>
-
-
-<body>
-
-
-    <!-- =================================
-         COPY BANK DETAILS BUTTON
-    ================================= -->
-
-    <div class="bank-container">
-
-        <button
-            class="share-btn"
-            id="copyDetailsBtn"
-            onclick="copyCombinedDetails()"
-        >
-            Copy Bank Details
-        </button>
-
+    <div class="thank-you-message">
+        Thanks for supporting<br>
+        live music :D
     </div>
 
+</div>
 
-    <!-- =================================
-         JAVASCRIPT
-    ================================= -->
 
-    <script>
+<!-- =================================
+     JAVASCRIPT
+================================= -->
 
-        async function copyCombinedDetails() {
+<script>
+
+    async function copyCombinedDetails() {
+
+        /*
+            ==============================
+            YOUR BANK DETAILS
+            ==============================
+        */
+
+        const name =
+            "TAI VAN DER BAR";
+
+        const number =
+            "38-9005-0490046-02";
+
+
+        /*
+            ==============================
+            TEXT THAT GETS COPIED
+            ==============================
+        */
+
+        const dynamicText =
+            `${name}\n${number}`;
+
+
+        /*
+            Find the button and
+            thank-you message
+        */
+
+        const button =
+            document.getElementById(
+                "copyDetailsBtn"
+            );
+
+        const thankYou =
+            document.getElementById(
+                "thankYou"
+            );
+
+
+        try {
 
             /*
-                ==============================
-                YOUR BANK DETAILS
-                ==============================
+                Copy the bank details
+                to the clipboard.
             */
 
-            const name =
-                "TAI VAN DER BAR";
-
-            const number =
-                "38-9005-0490046-02";
+            await navigator.clipboard.writeText(
+                dynamicText
+            );
 
 
             /*
-                ==============================
-                TEXT THAT GETS COPIED
-                ==============================
-
-                It will copy:
-
-                T VAN DER BAR
-                38-9005-0490046-02
+                Show confirmation
             */
 
-            const dynamicText =
-                `${name}\n${number}`;
+            button.innerText =
+                "Copied!";
+
+            button.classList.add(
+                "copied"
+            );
 
 
             /*
-                Find the button
+                Make the monster
+                and message appear.
             */
 
-            const button =
-                document.getElementById(
-                    "copyDetailsBtn"
-                );
+            thankYou.classList.add(
+                "show"
+            );
 
 
-            try {
+            /*
+                Return button to normal
+                after 2.5 seconds.
+            */
 
-                /*
-                    Copy the bank details
-                    to the phone clipboard.
-                */
-
-                await navigator.clipboard.writeText(
-                    dynamicText
-                );
-
-
-                /*
-                    Show confirmation
-                */
+            setTimeout(function() {
 
                 button.innerText =
-                    "Copied!";
+                    "Copy Bank Details";
 
-                button.classList.add(
+                button.classList.remove(
                     "copied"
                 );
 
-
-                /*
-                    Return to normal after
-                    2.5 seconds.
-                */
-
-                setTimeout(function() {
-
-                    button.innerText =
-                        "Copy Bank Details";
-
-                    button.classList.remove(
-                        "copied"
-                    );
-
-                }, 2500);
+            }, 2500);
 
 
-            } catch (err) {
+        } catch (err) {
 
-                /*
-                    If copying doesn't work
-                */
+            /*
+                If copying doesn't work
+            */
 
-                console.error(
-                    "Could not copy details:",
-                    err
-                );
+            console.error(
+                "Could not copy details:",
+                err
+            );
 
+
+            button.innerText =
+                "Copy Failed";
+
+
+            setTimeout(function() {
 
                 button.innerText =
-                    "Copy Failed";
+                    "Copy Bank Details";
 
-
-                setTimeout(function() {
-
-                    button.innerText =
-                        "Copy Bank Details";
-
-                }, 2500);
-
-            }
+            }, 2500);
 
         }
 
-    </script>
+    }
 
+</script>
 </body>
 </html>
