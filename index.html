@@ -2,26 +2,35 @@
 <html lang="en-NZ">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Antithetical Conjunction - Payment Details</title>
 
+
     <style>
 
-        /* =========================================
+        /* ==========================================
            PAGE
-        ========================================= */
+        ========================================== */
 
         html,
         body {
             margin: 0;
             padding: 0;
+
             width: 100%;
             height: 100%;
         }
 
+
         body {
+
+            margin: 0;
+
             font-family:
                 -apple-system,
                 BlinkMacSystemFont,
@@ -29,27 +38,34 @@
                 Roboto,
                 sans-serif;
 
-            background-image: url("image-1024.jpg");
+            background-image:
+                url("image-1024.jpg");
 
             background-size: cover;
+
             background-position: center;
+
             background-repeat: no-repeat;
 
             min-height: 100vh;
 
-            position: relative;
             overflow: hidden;
+
+            position: relative;
         }
 
 
-        /* =========================================
+
+        /* ==========================================
            BUTTON
-        ========================================= */
+        ========================================== */
 
         .bank-container {
+
             position: absolute;
 
             top: 40%;
+
             left: 50%;
 
             transform:
@@ -62,52 +78,516 @@
 
 
         .share-btn {
+
             width: 100%;
 
             padding: 24px;
 
             background: #ffffff;
+
             color: #000000;
 
             border: none;
+
             border-radius: 8px;
 
             font-size: 19px;
-            font-weight: 700;
 
-            letter-spacing: 0.2px;
+            font-weight: 700;
 
             cursor: pointer;
 
             box-shadow:
-                0 5px 18px rgba(0, 0, 0, 0.5);
+                0 5px 18px
+                rgba(0, 0, 0, 0.5);
 
             position: relative;
-            z-index: 200;
 
-            transition:
-                background 0.2s ease;
+            z-index: 200;
         }
 
 
         .share-btn:hover {
+
             background: #eeeeee;
         }
 
 
         .share-btn:active {
+
             transform: scale(0.97);
         }
 
 
-        /* =========================================
-           THANK-YOU MESSAGE
-        ========================================= */
 
-        .thanks-message {
+        /* ==========================================
+           BLOOD SPLAT
+        ========================================== */
+
+        .blood {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100vw;
+
+            height: 100vh;
+
+            pointer-events: none;
+
+            z-index: 50;
+
+            opacity: 0;
+
+            transform:
+                scale(0.05);
+
+            transform-origin:
+                50% 40%;
+
+            transition:
+                transform 0.55s
+                cubic-bezier(.12,.9,.2,1),
+
+                opacity 0.1s ease;
+        }
+
+
+        .blood.active {
+
+            opacity: 1;
+
+            transform:
+                scale(1);
+        }
+
+
+
+        /* ==========================================
+           ROUNDED ORGANIC SPLAT
+        ========================================== */
+
+        .splat {
+
             position: absolute;
 
-            top: calc(100% + 30px);
+            left: 50%;
+
+            top: 40%;
+
+            width: 900px;
+
+            height: 700px;
+
+            transform:
+                translate(-50%, -50%);
+
+            background:
+
+                radial-gradient(
+                    ellipse at 50% 48%,
+
+                    #b00000 0%,
+
+                    #920000 45%,
+
+                    #760000 72%,
+
+                    #570000 100%
+                );
+
+            /*
+                Rounded organic shape.
+
+                Unlike polygon(), this uses
+                rounded blobs and circles.
+            */
+
+            border-radius:
+
+                48% 52% 46% 54%
+                /
+                51% 45% 55% 49%;
+
+            box-shadow:
+
+                0 10px 20px
+                rgba(0, 0, 0, 0.35),
+
+                inset
+                0 -15px 25px
+                rgba(40, 0, 0, 0.3);
+
+            transform-origin:
+                center;
+
+            transform:
+                translate(-50%, -50%)
+                scale(0);
+
+            opacity: 0;
+
+            transition:
+
+                transform 0.55s
+                cubic-bezier(.12,.9,.2,1),
+
+                opacity 0.1s ease;
+        }
+
+
+        .blood.active .splat {
+
+            transform:
+                translate(-50%, -50%)
+                scale(1);
+
+            opacity: 1;
+        }
+
+
+
+        /* ==========================================
+           ORGANIC SPLAT BLOBS
+        ========================================== */
+
+        .blob {
+
+            position: absolute;
+
+            background:
+                #850000;
+
+            border-radius:
+                50%;
+
+            transform:
+                scale(0);
+
+            opacity: 0;
+
+            transition:
+                transform 0.55s
+                cubic-bezier(.1,.9,.2,1);
+        }
+
+
+        .blood.active .blob {
+
+            transform:
+                scale(1);
+
+            opacity: 1;
+        }
+
+
+        .blob-1 {
+
+            width: 220px;
+            height: 150px;
+
+            left: -100px;
+            top: 220px;
+
+            transform:
+                rotate(-25deg)
+                scale(0);
+        }
+
+
+        .blob-2 {
+
+            width: 250px;
+            height: 170px;
+
+            right: -120px;
+            top: 180px;
+
+            transform:
+                rotate(20deg)
+                scale(0);
+        }
+
+
+        .blob-3 {
+
+            width: 170px;
+            height: 120px;
+
+            left: 100px;
+            top: -80px;
+        }
+
+
+        .blob-4 {
+
+            width: 190px;
+            height: 130px;
+
+            right: 100px;
+            bottom: -60px;
+        }
+
+
+
+        /* ==========================================
+           PAINT SPLASH TENDRILS
+        ========================================== */
+
+        .tendril {
+
+            position: absolute;
+
+            background:
+                #790000;
+
+            border-radius:
+                50%;
+
+            opacity: 0;
+
+            transform:
+                scaleX(0);
+
+            transform-origin:
+                center;
+
+            transition:
+                transform 0.65s
+                cubic-bezier(.1,.9,.2,1),
+
+                opacity 0.2s ease;
+        }
+
+
+        .blood.active .tendril {
+
+            opacity: 1;
+
+            transform:
+                scaleX(1);
+        }
+
+
+        .tendril-left {
+
+            width: 500px;
+            height: 55px;
+
+            left: -420px;
+            top: 45%;
+
+            transform:
+                rotate(-8deg)
+                scaleX(0);
+        }
+
+
+        .tendril-right {
+
+            width: 500px;
+            height: 55px;
+
+            right: -420px;
+            top: 42%;
+
+            transform:
+                rotate(10deg)
+                scaleX(0);
+        }
+
+
+        .tendril-top {
+
+            width: 400px;
+            height: 45px;
+
+            top: -270px;
+            left: 20%;
+
+            transform:
+                rotate(-25deg)
+                scaleX(0);
+        }
+
+
+        .tendril-bottom {
+
+            width: 450px;
+            height: 50px;
+
+            bottom: -280px;
+            right: 20%;
+
+            transform:
+                rotate(-20deg)
+                scaleX(0);
+        }
+
+
+
+        /* ==========================================
+           BIG BLOOD DRIPS
+        ========================================== */
+
+        .drip {
+
+            position: absolute;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #850000,
+                    #620000
+                );
+
+            border-radius:
+                0 0 50% 50%;
+
+            transform:
+                scaleY(0);
+
+            transform-origin:
+                top;
+
+            opacity: 0;
+
+            transition:
+                transform 0.8s
+                cubic-bezier(.15,.8,.2,1),
+
+                opacity 0.2s ease;
+        }
+
+
+        .blood.active .drip {
+
+            transform:
+                scaleY(1);
+
+            opacity: 1;
+        }
+
+
+        .drip-1 {
+
+            width: 38px;
+            height: 190px;
+
+            left: 27%;
+
+            top: 62%;
+
+            transition-delay:
+                0.05s;
+        }
+
+
+        .drip-2 {
+
+            width: 25px;
+            height: 130px;
+
+            left: 39%;
+
+            top: 61%;
+
+            transition-delay:
+                0.15s;
+        }
+
+
+        .drip-3 {
+
+            width: 52px;
+            height: 250px;
+
+            left: 50%;
+
+            top: 59%;
+
+            transition-delay:
+                0.02s;
+        }
+
+
+        .drip-4 {
+
+            width: 28px;
+            height: 170px;
+
+            left: 62%;
+
+            top: 61%;
+
+            transition-delay:
+                0.2s;
+        }
+
+
+        .drip-5 {
+
+            width: 42px;
+            height: 210px;
+
+            left: 73%;
+
+            top: 60%;
+
+            transition-delay:
+                0.1s;
+        }
+
+
+
+        /* ==========================================
+           BLOOD DISAPPEARING
+
+           EVERYTHING disappears together.
+        ========================================== */
+
+        .blood.draining {
+
+            opacity: 0;
+
+            transform:
+                scale(1.08)
+                translateY(40px);
+
+            transition:
+
+                opacity 2.5s ease,
+
+                transform 2.5s ease;
+        }
+
+
+        .blood.draining .drip {
+
+            transform:
+                scaleY(0);
+
+            opacity: 0;
+
+            transition:
+                transform 1.5s ease-in,
+
+                opacity 1.2s ease;
+        }
+
+
+
+        /* ==========================================
+           THANK YOU MESSAGE
+        ========================================== */
+
+        .thanks-message {
+
+            position: absolute;
+
+            top:
+                calc(100% + 30px);
 
             left: 50%;
 
@@ -120,489 +600,127 @@
 
             opacity: 0;
 
-            z-index: 90;
+            z-index: 80;
 
             pointer-events: none;
 
             transition:
-                opacity 1.4s ease;
+                opacity 1.2s ease;
         }
 
 
         .thanks-message.show {
+
             opacity: 1;
         }
 
 
-        /* =========================================
-           BLOODY LETTERING
-        ========================================= */
+
+        /* ==========================================
+           BLOOD LETTERING
+        ========================================== */
 
         .thanks-text {
+
             position: relative;
 
-            color: #720000;
+            display: inline-block;
+
+            color:
+                #700000;
 
             font-family:
                 Georgia,
                 "Times New Roman",
                 serif;
 
-            font-size: 23px;
+            font-size:
+                23px;
 
-            font-weight: 900;
+            font-weight:
+                900;
 
-            line-height: 1.25;
+            line-height:
+                1.2;
 
-            letter-spacing: 0.5px;
+            letter-spacing:
+                0.4px;
 
             text-shadow:
-                1px 2px 0 #350000,
-                0 3px 6px
-                rgba(0, 0, 0, 0.65);
 
-            display: inline-block;
+                1px 2px 0
+                #3b0000,
+
+                0 3px 4px
+                rgba(0, 0, 0, 0.55);
         }
 
 
         /*
-           Individual hanging drips
+            BLOOD DRIPS ATTACHED
+            TO THE ACTUAL WORDS
         */
 
         .thanks-text::before {
+
             content: "";
 
             position: absolute;
 
-            left: 17%;
+            left: 12%;
 
-            bottom: -25px;
+            bottom: -24px;
 
-            width: 9px;
+            width: 10px;
+
             height: 32px;
 
             background:
                 linear-gradient(
                     to bottom,
-                    #720000,
-                    #4d0000
+                    #700000,
+                    #4b0000
                 );
 
             border-radius:
                 0 0 50% 50%;
 
             box-shadow:
-                65px 4px 0 -2px #720000,
-                130px -3px 0 -3px #720000;
+
+                55px 7px 0 -2px #700000,
+
+                118px 2px 0 -3px #700000,
+
+                190px 5px 0 -3px #700000;
         }
 
 
         .thanks-text::after {
+
             content: "";
 
             position: absolute;
 
-            right: 16%;
+            right: 9%;
 
             bottom: -17px;
 
-            width: 6px;
-            height: 21px;
+            width: 7px;
 
-            background: #720000;
+            height: 24px;
+
+            background:
+                #700000;
 
             border-radius:
                 0 0 50% 50%;
         }
 
 
-        /* =========================================
-           GIANT SPLAT
-        ========================================= */
 
-        .splat {
-            position: fixed;
-
-            left: 50%;
-            top: 40%;
-
-            width: 0;
-            height: 0;
-
-            z-index: 50;
-
-            pointer-events: none;
-        }
-
-
-        /*
-           Main paint blob.
-
-           Starts tiny and expands from
-           exactly where the button is.
-        */
-
-        .splat-main {
-
-            position: absolute;
-
-            left: -300px;
-            top: -250px;
-
-            width: 600px;
-            height: 500px;
-
-            background:
-                radial-gradient(
-                    ellipse at 50% 48%,
-                    #a90000 0%,
-                    #850000 55%,
-                    #650000 80%,
-                    #4a0000 100%
-                );
-
-            /*
-               Irregular paint-splat outline.
-            */
-
-            clip-path:
-                polygon(
-
-                    50% 0%,
-                    57% 15%,
-                    64% 5%,
-                    67% 21%,
-                    78% 8%,
-                    77% 25%,
-                    92% 14%,
-                    86% 31%,
-                    100% 27%,
-                    91% 40%,
-
-                    100% 49%,
-
-                    91% 55%,
-                    98% 67%,
-                    82% 63%,
-                    91% 80%,
-                    75% 72%,
-                    77% 94%,
-                    64% 79%,
-                    59% 100%,
-                    50% 82%,
-
-                    40% 100%,
-                    36% 80%,
-                    22% 94%,
-                    24% 73%,
-                    8% 82%,
-                    17% 65%,
-                    2% 68%,
-                    9% 55%,
-
-                    0% 48%,
-                    10% 39%,
-                    0% 27%,
-                    15% 31%,
-                    8% 14%,
-                    23% 25%,
-                    22% 8%,
-                    34% 21%,
-                    37% 5%,
-                    43% 15%
-                );
-
-            transform:
-                scale(0);
-
-            opacity: 0;
-
-            transition:
-                transform 0.65s
-                cubic-bezier(.12,.85,.18,1),
-
-                opacity 0.1s ease;
-        }
-
-
-        /* =========================================
-           SPLAT APPEARS
-        ========================================= */
-
-        .splat.active
-        .splat-main {
-
-            transform:
-                scale(1);
-
-            opacity: 1;
-        }
-
-
-        /* =========================================
-           HUGE PAINT FINGERS
-        ========================================= */
-
-        .paint-finger {
-
-            position: fixed;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #8d0000,
-                    #600000
-                );
-
-            z-index: 48;
-
-            pointer-events: none;
-
-            transform:
-                scale(0);
-
-            transform-origin:
-                center;
-
-            opacity: 0;
-
-            transition:
-                transform 0.7s
-                cubic-bezier(.1,.9,.2,1),
-
-                opacity 0.2s ease;
-
-            border-radius:
-                50%;
-        }
-
-
-        /*
-           Left
-        */
-
-        .finger-left {
-
-            width: 280px;
-            height: 100px;
-
-            left: -20px;
-            top: 37%;
-
-            transform:
-                rotate(-18deg)
-                scale(0);
-        }
-
-
-        /*
-           Right
-        */
-
-        .finger-right {
-
-            width: 320px;
-            height: 115px;
-
-            right: -30px;
-            top: 42%;
-
-            transform:
-                rotate(15deg)
-                scale(0);
-        }
-
-
-        /*
-           Top-left
-        */
-
-        .finger-top {
-
-            width: 230px;
-            height: 90px;
-
-            left: 10%;
-            top: 12%;
-
-            transform:
-                rotate(28deg)
-                scale(0);
-        }
-
-
-        /*
-           Bottom-right
-        */
-
-        .finger-bottom {
-
-            width: 250px;
-            height: 95px;
-
-            right: 12%;
-            bottom: 15%;
-
-            transform:
-                rotate(-25deg)
-                scale(0);
-        }
-
-
-        .splat.active
-        ~ .paint-finger {
-
-            opacity: 1;
-
-            transform:
-                scale(1);
-        }
-
-
-        /* =========================================
-           LONG DRIPS FROM THE SPLAT
-        ========================================= */
-
-        .drip {
-
-            position: fixed;
-
-            top: 54%;
-
-            width: var(--width);
-            height: var(--height);
-
-            left: var(--left);
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #870000 0%,
-                    #680000 70%,
-                    #4b0000 100%
-                );
-
-            border-radius:
-                0 0 50% 50%;
-
-            transform:
-                scaleY(0);
-
-            transform-origin: top;
-
-            z-index: 51;
-
-            pointer-events: none;
-
-            opacity: 0;
-
-            transition:
-                transform 1.2s
-                cubic-bezier(.15,.8,.2,1),
-
-                opacity 0.2s ease;
-        }
-
-
-        .splat.active
-        ~ .drip {
-
-            transform:
-                scaleY(1);
-
-            opacity: 1;
-        }
-
-
-        /* =========================================
-           DRIP SIZES
-        ========================================= */
-
-        .drip-1 {
-
-            --left: 20%;
-            --width: 30px;
-            --height: 220px;
-
-        }
-
-
-        .drip-2 {
-
-            --left: 34%;
-            --width: 18px;
-            --height: 140px;
-
-        }
-
-
-        .drip-3 {
-
-            --left: 48%;
-            --width: 42px;
-            --height: 290px;
-
-        }
-
-
-        .drip-4 {
-
-            --left: 63%;
-            --width: 22px;
-            --height: 190px;
-
-        }
-
-
-        .drip-5 {
-
-            --left: 76%;
-            --width: 32px;
-            --height: 230px;
-
-        }
-
-
-        /* =========================================
-           DRIP FADE
-        ========================================= */
-
-        .splat.draining
-        .splat-main {
-
-            animation:
-                bloodDrain 3s
-                ease-in forwards;
-        }
-
-
-        @keyframes bloodDrain {
-
-            0% {
-                opacity: 1;
-                transform:
-                    scale(1);
-            }
-
-            60% {
-                opacity: 0.8;
-                transform:
-                    scale(1.02)
-                    translateY(15px);
-            }
-
-            100% {
-                opacity: 0;
-                transform:
-                    scale(1.08)
-                    translateY(60px);
-            }
-        }
-
-
-        /* =========================================
+        /* ==========================================
            MOBILE
-        ========================================= */
+        ========================================== */
 
         @media (max-width: 600px) {
 
@@ -622,13 +740,17 @@
             }
 
 
-            .splat-main {
+            .splat {
 
-                left: -220px;
-                top: -220px;
+                width: 600px;
 
-                width: 440px;
-                height: 440px;
+                height: 560px;
+            }
+
+
+            .tendril {
+
+                display: none;
             }
 
 
@@ -644,30 +766,33 @@
             }
 
 
-            .paint-finger {
-
-                display: none;
-            }
-
-
             .drip-1 {
-                --left: 15%;
+
+                left: 15%;
             }
+
 
             .drip-2 {
-                --left: 30%;
+
+                left: 30%;
             }
+
 
             .drip-3 {
-                --left: 48%;
+
+                left: 48%;
             }
+
 
             .drip-4 {
-                --left: 65%;
+
+                left: 65%;
             }
 
+
             .drip-5 {
-                --left: 80%;
+
+                left: 80%;
             }
 
         }
@@ -680,69 +805,54 @@
 <body>
 
 
-    <!-- =========================================
-         GIANT SPLAT
+    <!-- ==========================================
+         BLOOD SPLAT
     ========================================== -->
 
     <div
-        class="splat"
-        id="splat"
+        class="blood"
+        id="blood"
     >
 
-        <div
-            class="splat-main"
-        ></div>
+        <div class="splat">
+
+            <div class="blob blob-1"></div>
+
+            <div class="blob blob-2"></div>
+
+            <div class="blob blob-3"></div>
+
+            <div class="blob blob-4"></div>
+
+
+            <div class="tendril tendril-left"></div>
+
+            <div class="tendril tendril-right"></div>
+
+            <div class="tendril tendril-top"></div>
+
+            <div class="tendril tendril-bottom"></div>
+
+        </div>
+
+
+        <!-- DRIPS -->
+
+        <div class="drip drip-1"></div>
+
+        <div class="drip drip-2"></div>
+
+        <div class="drip drip-3"></div>
+
+        <div class="drip drip-4"></div>
+
+        <div class="drip drip-5"></div>
 
     </div>
 
 
-    <!-- =========================================
-         SPLAT EXTENSIONS
-    ========================================== -->
 
-    <div
-        class="paint-finger finger-left"
-    ></div>
-
-    <div
-        class="paint-finger finger-right"
-    ></div>
-
-    <div
-        class="paint-finger finger-top"
-    ></div>
-
-    <div
-        class="paint-finger finger-bottom"
-    ></div>
-
-
-    <!-- =========================================
-         DRIPS
-    ========================================== -->
-
-    <div
-        class="drip drip-1"
-    ></div>
-
-    <div
-        class="drip drip-2"
-    ></div>
-
-    <div
-        class="drip drip-3"
-    ></div>
-
-    <div
-        class="drip drip-4"
-    ></div>
-
-    <div
-        class="drip drip-5"
-    ></div>
-
-
-    <!-- =========================================
+    <!-- ==========================================
          BUTTON
     ========================================== -->
 
@@ -757,8 +867,8 @@
         </button>
 
 
-        <!-- =====================================
-             BLOODY THANK-YOU
+        <!-- ======================================
+             MESSAGE
         ====================================== -->
 
         <div
@@ -781,9 +891,9 @@
     <script>
 
 
-        /* =========================================
+        /* ==========================================
            COPY BANK DETAILS
-        ========================================= */
+        ========================================== */
 
         async function copyCombinedDetails() {
 
@@ -806,9 +916,9 @@
                 );
 
 
-            const splat =
+            const blood =
                 document.getElementById(
-                    "splat"
+                    "blood"
                 );
 
 
@@ -821,62 +931,63 @@
             try {
 
 
-                /* ==============================
-                   COPY
-                ============================== */
+                /* ==================================
+                   COPY BANK DETAILS
+                ================================== */
 
                 await navigator.clipboard.writeText(
                     dynamicText
                 );
 
 
-                /* ==============================
-                   BUTTON DOES NOT MOVE
-                ============================== */
+                /* ==================================
+                   CHANGE BUTTON TEXT
+                ================================== */
 
                 button.innerText =
                     "Copied!";
 
 
-                /* ==============================
-                   EXPLODE THE PAINT
-                ============================== */
+                /* ==================================
+                   SPLAT
+                ================================== */
 
-                splat.classList.add(
+                blood.classList.add(
                     "active"
                 );
 
 
-                /* ==============================
-                   AFTER THE SPLAT HAS LANDED
-                ============================== */
+                /* ==================================
+                   LET IT SIT FOR 3 SECONDS
+                ================================== */
 
                 setTimeout(function() {
 
+
                     /*
-                       Start draining the
-                       giant paint splat.
+                       Blood begins disappearing.
                     */
 
-                    splat.classList.add(
+                    blood.classList.add(
                         "draining"
                     );
 
 
                     /*
-                       Reveal bloody message.
+                       Message appears.
                     */
 
                     message.classList.add(
                         "show"
                     );
 
-                }, 3200);
+
+                }, 3000);
 
 
-                /* ==============================
+                /* ==================================
                    RESET BUTTON
-                ============================== */
+                ================================== */
 
                 setTimeout(function() {
 
